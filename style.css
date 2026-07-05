@@ -638,3 +638,56 @@ gap:15px;
     }
 
 }
+/* ===========================
+   Founder Section
+=========================== */
+
+.founder{
+    padding:80px 10%;
+    background:#111;
+    color:white;
+}
+
+.founder-container{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:60px;
+    flex-wrap:wrap;
+}
+
+.founder-image img{
+    width:320px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
+}
+
+.founder-content{
+    max-width:650px;
+}
+
+.founder-content h2{
+    color:#ff9900;
+    font-size:36px;
+    margin-bottom:10px;
+}
+
+.founder-content h3{
+    font-size:28px;
+    margin-bottom:5px;
+}
+
+.founder-content h4{
+    color:#ccc;
+    margin-bottom:20px;
+}
+
+.founder-content p{
+    line-height:1.9;
+    color:#ddd;
+    font-size:17px;
+}
+
+.founder-content strong{
+    color:#ff9900;
+}
