@@ -34,13 +34,15 @@ box-shadow:0 5px 20px rgba(0,0,0,.4);
 }
 
 .logo h2{
-font-size:32px;
-font-weight:700;
-color:#fff;
+    font-size: 42px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    letter-spacing: -1px;
 }
 
 .logo span{
-color:#ff8c00;
+    color: #ff8c00;
 }
 
 nav ul{
