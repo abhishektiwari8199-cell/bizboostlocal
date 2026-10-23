@@ -16,7 +16,6 @@
         .logo-container h1 { font-size: 22px; font-weight: bold; color: white; line-height: 1; }
         .logo-container span { font-size: 11px; color: #ff9900; font-weight: bold; margin-top: 2px; }
 
-        /* Deliver To Box */
         .deliver-to { display: flex; align-items: center; gap: 5px; cursor: pointer; border: 1px solid transparent; padding: 4px 8px; border-radius: 2px; }
         .deliver-to:hover { border-color: white; }
         .deliver-text { display: flex; flex-direction: column; font-size: 12px; color: #ccc; }
@@ -29,7 +28,6 @@
         .search-btn { background-color: #febd69; border: none; padding: 0 16px; border-radius: 0 4px 4px 0; cursor: pointer; font-size: 18px; }
         .search-btn:hover { background-color: #f3a847; }
 
-        /* Header Right Actions */
         .header-nav { display: flex; align-items: center; gap: 15px; }
         .nav-item { display: flex; flex-direction: column; font-size: 12px; color: white; cursor: pointer; border: 1px solid transparent; padding: 4px 8px; border-radius: 2px; }
         .nav-item:hover { border-color: white; }
@@ -39,7 +37,7 @@
         .cart-btn:hover { border-color: white; }
         .cart-count { color: #f08804; font-size: 16px; font-weight: bold; margin-left: 4px; }
 
-        /* Amazon Sub Navigation Bar */
+        /* Sub Navigation Bar */
         .sub-nav { background-color: #232f3e; color: white; display: flex; align-items: center; gap: 15px; padding: 8px 20px; font-size: 14px; overflow-x: auto; white-space: nowrap; }
         .sub-nav-item { cursor: pointer; padding: 4px 8px; border: 1px solid transparent; border-radius: 2px; }
         .sub-nav-item:hover { border-color: white; }
@@ -48,9 +46,23 @@
         /* Main Container */
         .main-container { max-width: 1500px; margin: 0 auto; padding: 15px; }
 
-        /* Banner */
-        .banner { background: linear-gradient(to bottom, #232f3e, #e3e6e6); padding: 30px 20px; border-radius: 4px; margin-bottom: 20px; color: white; text-align: center; }
-        .banner h2 { font-size: 26px; color: #febd69; margin-bottom: 5px; }
+        /* TWO BANNERS SECTION */
+        .banner-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .banner { padding: 25px 20px; border-radius: 6px; color: white; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .banner-1 { background: linear-gradient(135deg, #131921, #232f3e); border-left: 5px solid #febd69; }
+        .banner-2 { background: linear-gradient(135deg, #007185, #004d5a); border-left: 5px solid #ff9900; }
+        .banner h2 { font-size: 22px; color: #febd69; margin-bottom: 8px; }
+        .banner p { font-size: 14px; color: #eaeded; }
+
+        /* CATEGORY CARDS SECTION */
+        .choice-section-title { font-size: 20px; font-weight: bold; margin-bottom: 12px; color: #0f1111; }
+        .choice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .choice-card { background: white; padding: 18px 12px; border-radius: 6px; text-align: center; cursor: pointer; border: 2px solid transparent; transition: all 0.2s ease-in-out; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+        .choice-card:hover { border-color: #e77600; transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+        .choice-card.active { border-color: #007185; background-color: #f0f8f9; }
+        .choice-icon { font-size: 36px; margin-bottom: 8px; display: block; }
+        .choice-title { font-size: 15px; font-weight: bold; margin-bottom: 4px; color: #0f1111; }
+        .choice-desc { font-size: 12px; color: #565959; }
 
         /* Grid Layout */
         .products-section-title { font-size: 20px; font-weight: bold; margin-bottom: 15px; background: white; padding: 15px; border-radius: 4px 4px 0 0; border-bottom: 1px solid #ddd; }
@@ -79,6 +91,7 @@
         .checkout-btn { background-color: #ffd814; border: 1px solid #fcd200; border-radius: 20px; padding: 12px; width: 100%; font-size: 15px; font-weight: bold; cursor: pointer; }
 
         @media (max-width: 900px) {
+            .banner-container { grid-template-columns: 1fr; }
             .deliver-to, .search-category { display: none; }
             header { padding: 10px; }
         }
@@ -90,7 +103,7 @@
     <header>
         <div class="logo-container">
             <h1>BizBoost</h1>
-            <span>BY JMD Group</span>
+            <span>by JMD Group</span>
         </div>
 
         <div class="deliver-to">
@@ -104,16 +117,141 @@
         <div class="search-container">
             <select class="search-category" id="categorySelect" onchange="filterCategory(this.value)">
                 <option value="all">All Categories</option>
-                <option value="Electronics">Electronics</option>
-                <option value="Fashion">Fashion</option>
-                <option value="Home & Kitchen">Home & Kitchen</option>
-                <option value="Grocery">Grocery</option>
-                <option value="Beauty & Personal Care">Beauty & Personal Care</option>
-                <option value="Sports & Fitness">Sports & Fitness</option>
+                <option value="Mens Clothing">Men's Clothing</option>
+                <option value="Womens Clothing">Women's Clothing</option>
+                <option value="Fresh Vegetables">Fresh Vegetables (Sabji)</option>
+                <option value="Kitchen Essentials">Kitchen Essentials</option>
+                <option value="Home Use Service">Home Use Services</option>
             </select>
             <input type="text" class="search-input" id="searchInput" onkeyup="filterProducts()" placeholder="Search BizBoost Amazon Store...">
             <button class="search-btn">🔍</button>
         </div>
 
         <div class="header-nav">
-            <div class="nav-
+            <div class="nav-item">
+                <span>Hello, Sign in</span>
+                <strong>Account & Lists</strong>
+            </div>
+            <div class="nav-item">
+                <span>Returns</span>
+                <strong>& Orders</strong>
+            </div>
+            <div class="cart-btn" onclick="toggleCart()">
+                🛒 Cart <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-Header Navigation -->
+    <div class="sub-nav">
+        <div class="sub-nav-item bold" onclick="selectType('all')">☰ All Products & Services</div>
+        <div class="sub-nav-item" onclick="selectType('Mens Clothing')">👔 Men's Clothing</div>
+        <div class="sub-nav-item" onclick="selectType('Womens Clothing')">👗 Women's Clothing</div>
+        <div class="sub-nav-item" onclick="selectType('Fresh Vegetables')">🥦 Sabji (Vegetables)</div>
+        <div class="sub-nav-item" onclick="selectType('Kitchen Essentials')">🍳 Kitchen Essentials</div>
+        <div class="sub-nav-item" onclick="selectType('Home Use Service')">🛠️ Home Services</div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="main-container">
+        
+        <!-- 1. TWO BANNERS SECTION -->
+        <div class="banner-container">
+            <div class="banner banner-1">
+                <h2>🏬 Local Fashion & Fresh Vegetables</h2>
+                <p>Buy Men's & Women's clothing or fresh daily Sabji from trusted local sellers.</p>
+            </div>
+            <div class="banner banner-2">
+                <h2>🍳 Kitchen Use & Home Services</h2>
+                <p>Order Kitchen essentials and book fast repair/cleaning services at home.</p>
+            </div>
+        </div>
+
+        <!-- 2. CATEGORY SELECTION CARDS -->
+        <div class="choice-section-title">Explore Categories:</div>
+        <div class="choice-grid">
+            <div class="choice-card" id="card-Mens Clothing" onclick="selectType('Mens Clothing')">
+                <span class="choice-icon">👔</span>
+                <div class="choice-title">Men's Clothing</div>
+                <div class="choice-desc">Shirts, T-Shirts & Jeans</div>
+            </div>
+            <div class="choice-card" id="card-Womens Clothing" onclick="selectType('Womens Clothing')">
+                <span class="choice-icon">👗</span>
+                <div class="choice-title">Women's Clothing</div>
+                <div class="choice-desc">Kurtis, Sarees & Ethnic Wear</div>
+            </div>
+            <div class="choice-card" id="card-Fresh Vegetables" onclick="selectType('Fresh Vegetables')">
+                <span class="choice-icon">🥦</span>
+                <div class="choice-title">Fresh Sabji (Vegetables)</div>
+                <div class="choice-desc">Potato, Tomato, Onion & Green Veggies</div>
+            </div>
+            <div class="choice-card" id="card-Kitchen Essentials" onclick="selectType('Kitchen Essentials')">
+                <span class="choice-icon">🍳</span>
+                <div class="choice-title">Kitchen Essentials</div>
+                <div class="choice-desc">Oil, Rice, Spices & Utensils</div>
+            </div>
+            <div class="choice-card" id="card-Home Use Service" onclick="selectType('Home Use Service')">
+                <span class="choice-icon">🛠️</span>
+                <div class="choice-title">Home Use Services</div>
+                <div class="choice-desc">AC Repair, Plumbing & Cleaning</div>
+            </div>
+        </div>
+
+        <!-- 3. PRODUCT / SERVICE LISTING -->
+        <div class="products-section-title" id="sectionHeader">All Available Offerings</div>
+        <div class="product-grid" id="productGrid"></div>
+    </div>
+
+    <!-- Cart Side Drawer -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Shopping Cart / Bookings</h3>
+            <button onclick="toggleCart()" style="background:none; border:none; font-size:20px; cursor:pointer;">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p>Your Cart is empty.</p>
+        </div>
+        <div style="border-top: 1px solid #ddd; padding-top: 12px;">
+            <h4 style="margin-bottom: 10px;">Subtotal: ₹<span id="cartTotal">0</span></h4>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Place Order</button>
+        </div>
+    </div>
+
+    <script>
+        const products = [
+            // Men's Clothing
+            { id: 1, name: "Men's Cotton Casual Slim-Fit Shirt", category: "Mens Clothing", price: 699, mrp: 1299, rating: "★★★★☆ (850)", image: "https://via.placeholder.com/200?text=Mens+Shirt" },
+            { id: 2, name: "Men's Premium Denim Jeans", category: "Mens Clothing", price: 999, mrp: 1999, rating: "★★★★☆ (620)", image: "https://via.placeholder.com/200?text=Mens+Jeans" },
+            
+            // Women's Clothing
+            { id: 3, name: "Women's Designer Ethnic Cotton Kurti", category: "Womens Clothing", price: 899, mrp: 1799, rating: "★★★★★ (980)", image: "https://via.placeholder.com/200?text=Womens+Kurti" },
+            { id: 4, name: "Women's Floral Printed Saree", category: "Womens Clothing", price: 1299, mrp: 2499, rating: "★★★★☆ (410)", image: "https://via.placeholder.com/200?text=Designer+Saree" },
+
+            // Fresh Vegetables (Sabji)
+            { id: 5, name: "Fresh Local Potato (Aloo) - 2kg Pack", category: "Fresh Vegetables", price: 60, mrp: 80, rating: "★★★★★ (3,100)", image: "https://via.placeholder.com/200?text=Fresh+Potato" },
+            { id: 6, name: "Farm Fresh Tomato (Tamatar) - 1kg", category: "Fresh Vegetables", price: 40, mrp: 60, rating: "★★★★☆ (2,450)", image: "https://via.placeholder.com/200?text=Fresh+Tomato" },
+            { id: 7, name: "Fresh Red Onion (Pyaz) - 2kg Pack", category: "Fresh Vegetables", price: 70, mrp: 90, rating: "★★★★★ (1,890)", image: "https://via.placeholder.com/200?text=Fresh+Onion" },
+
+            // Kitchen Essentials
+            { id: 8, name: "Fortune Mustard Oil (Kachhi Ghani) - 1L", category: "Kitchen Essentials", price: 155, mrp: 180, rating: "★★★★★ (4,200)", image: "https://via.placeholder.com/200?text=Mustard+Oil" },
+            { id: 9, name: "Premium Basmati Rice - 5kg Pack", category: "Kitchen Essentials", price: 549, mrp: 750, rating: "★★★★☆ (1,120)", image: "https://via.placeholder.com/200?text=Basmati+Rice" },
+            { id: 10, name: "Stainless Steel Pressure Cooker 3L", category: "Kitchen Essentials", price: 1299, mrp: 1999, rating: "★★★★☆ (750)", image: "https://via.placeholder.com/200?text=Pressure+Cooker" },
+
+            // Home Use Services
+            { id: 11, name: "Home Deep Cleaning Service", category: "Home Use Service", price: 1499, mrp: 2499, rating: "★★★★★ (450)", image: "https://via.placeholder.com/200?text=Deep+Cleaning" },
+            { id: 12, name: "AC Service & Repairing Visit", category: "Home Use Service", price: 499, mrp: 999, rating: "★★★★☆ (890)", image: "https://via.placeholder.com/200?text=AC+Service" }
+        ];
+
+        let cart = [];
+
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            if (items.length === 0) {
+                grid.innerHTML = "<p style='padding:20px;'>No items found in this category.</p>";
+                return;
+            }
+            grid.innerHTML = items.map(p => `
+                <div class="product-card">
+                    <div>
+                        <img src="${p.image}" alt="${p.name}">
+                        <div class="product-title
