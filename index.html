@@ -46,27 +46,21 @@
         /* Main Container */
         .main-container { max-width: 1500px; margin: 0 auto; padding: 15px; }
 
-        /* MAIN HERO ATTRACTION BANNER (Big Banner) */
-        .hero-banner { 
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0284c7 100%); 
-            color: white; 
-            padding: 40px 30px; 
-            border-radius: 8px; 
-            margin-bottom: 25px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            position: relative;
+        /* CUSTOM HERO ATTRACTION BANNER (Apki hero.png.png image) */
+        .custom-hero-banner {
+            width: 100%;
+            margin-bottom: 25px;
+            border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            cursor: pointer;
         }
-        .hero-content { max-width: 60%; z-index: 2; }
-        .hero-badge { background-color: #ff9900; color: #111; font-weight: bold; font-size: 12px; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; display: inline-block; margin-bottom: 12px; }
-        .hero-title { font-size: 32px; font-weight: 800; line-height: 1.2; margin-bottom: 10px; color: #ffffff; }
-        .hero-subtitle { font-size: 16px; color: #cbd5e1; margin-bottom: 20px; }
-        .hero-btn { background-color: #ffd814; color: #111; border: none; padding: 12px 28px; font-size: 16px; font-weight: bold; border-radius: 25px; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-        .hero-btn:hover { background-color: #f7ca00; transform: scale(1.05); }
-        .hero-graphic { font-size: 80px; z-index: 2; opacity: 0.9; }
+        .custom-hero-banner img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            display: block;
+        }
 
         /* TWO SIDE-BY-SIDE BANNERS */
         .banner-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
@@ -128,9 +122,6 @@
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 
         @media (max-width: 900px) {
-            .hero-banner { flex-direction: column; text-align: center; padding: 25px 15px; }
-            .hero-content { max-width: 100%; }
-            .hero-graphic { margin-top: 15px; font-size: 60px; }
             .banner-container { grid-template-columns: 1fr; }
             .deliver-to, .search-category { display: none; }
             header { padding: 10px; }
@@ -196,15 +187,9 @@
     <!-- Main Content Container -->
     <div class="main-container">
         
-        <!-- 1. MAIN HERO ATTRACTION BANNER (Explore Category ke theek Upar) -->
-        <div class="hero-banner">
-            <div class="hero-content">
-                <span class="hero-badge">🌟 BizBoost Special Offer</span>
-                <h1 class="hero-title">Your Local Shops, Delivered at Express Speed!</h1>
-                <p class="hero-subtitle">Get up to 40% OFF on Clothing, Fresh Vegetables, Kitchen Items & Home Repair Services.</p>
-                <button class="hero-btn" onclick="scrollToCategories()">Explore Best Deals Now 👇</button>
-            </div>
-            <div class="hero-graphic">🛍️</div>
+        <!-- 1. YOUR OWN CUSTOM HERO ATTRACTION BANNER IMAGE -->
+        <div class="custom-hero-banner" onclick="scrollToCategories()">
+            <img src="hero.png.png" alt="BizBoost Local Main Banner">
         </div>
 
         <!-- 2. TWO BANNERS SECTION -->
