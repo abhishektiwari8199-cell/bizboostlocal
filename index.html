@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BizBoost Local - Official Store</title>
+    <title>BizBoost Local - Fatehpur Store</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Arial', sans-serif; }
         body { background-color: #e3e6e6; color: #0f1111; }
@@ -46,29 +46,21 @@
         /* Main Container */
         .main-container { max-width: 1500px; margin: 0 auto; padding: 15px; }
 
-        /* CUSTOM HERO ATTRACTION BANNER (Apki hero.png.png image) */
+        /* FATEHPUR MAIN BANNER */
         .custom-hero-banner {
             width: 100%;
             margin-bottom: 25px;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
             cursor: pointer;
+            border: 2px solid #ff9900;
         }
         .custom-hero-banner img {
             width: 100%;
-            max-height: 400px;
-            object-fit: cover;
+            height: auto;
             display: block;
         }
-
-        /* TWO SIDE-BY-SIDE BANNERS */
-        .banner-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
-        .banner { padding: 22px 20px; border-radius: 6px; color: white; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .banner-1 { background: linear-gradient(135deg, #131921, #232f3e); border-left: 5px solid #febd69; }
-        .banner-2 { background: linear-gradient(135deg, #007185, #004d5a); border-left: 5px solid #ff9900; }
-        .banner h2 { font-size: 20px; color: #febd69; margin-bottom: 6px; }
-        .banner p { font-size: 13px; color: #eaeded; }
 
         /* CATEGORY CARDS SECTION */
         .choice-section-title { font-size: 20px; font-weight: bold; margin-bottom: 12px; color: #0f1111; }
@@ -122,7 +114,6 @@
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 
         @media (max-width: 900px) {
-            .banner-container { grid-template-columns: 1fr; }
             .deliver-to, .search-category { display: none; }
             header { padding: 10px; }
         }
@@ -142,7 +133,7 @@
             <span>📍</span>
             <div class="deliver-text">
                 <span>Deliver to</span>
-                <strong id="headerLocation">Select Location</strong>
+                <strong id="headerLocation">Fatehpur</strong>
             </div>
         </div>
 
@@ -187,25 +178,13 @@
     <!-- Main Content Container -->
     <div class="main-container">
         
-        <!-- 1. YOUR OWN CUSTOM HERO ATTRACTION BANNER IMAGE -->
+        <!-- FATEHPUR SPECIAL MAIN HERO BANNER -->
         <div class="custom-hero-banner" onclick="scrollToCategories()">
-            <img src="hero.png.png" alt="BizBoost Local Main Banner">
+            <img src="fatehpur-banner.jpg" alt="BizBoost Local Fatehpur Banner">
         </div>
 
-        <!-- 2. TWO BANNERS SECTION -->
-        <div class="banner-container">
-            <div class="banner banner-1">
-                <h2>🏬 Local Fashion & Fresh Vegetables</h2>
-                <p>Buy Men's & Women's clothing or fresh daily Sabji from trusted local sellers.</p>
-            </div>
-            <div class="banner banner-2">
-                <h2>🍳 Kitchen Use & Home Services</h2>
-                <p>Order Kitchen essentials and book fast repair/cleaning services at home.</p>
-            </div>
-        </div>
-
-        <!-- 3. CATEGORY SELECTION CARDS -->
-        <div class="choice-section-title" id="exploreCategoriesSec">Explore Categories:</div>
+        <!-- CATEGORY SELECTION CARDS -->
+        <div class="choice-section-title" id="exploreCategoriesSec">Explore Categories in Fatehpur:</div>
         <div class="choice-grid">
             <div class="choice-card" id="card-Mens Clothing" onclick="selectType('Mens Clothing')">
                 <span class="choice-icon">👔</span>
@@ -234,8 +213,8 @@
             </div>
         </div>
 
-        <!-- 4. PRODUCT / SERVICE LISTING -->
-        <div class="products-section-title" id="sectionHeader">All Available Offerings</div>
+        <!-- PRODUCT / SERVICE LISTING -->
+        <div class="products-section-title" id="sectionHeader">All Available Offerings in Fatehpur</div>
         <div class="product-grid" id="productGrid"></div>
     </div>
 
@@ -243,13 +222,13 @@
     <div class="modal" id="locationModal">
         <div class="modal-box">
             <div class="modal-header">
-                <span>Choose your location</span>
+                <span>Choose your location in Fatehpur</span>
                 <span onclick="closeLocationModal()" style="cursor:pointer; font-size:18px;">✕</span>
             </div>
             <div class="modal-body">
                 <p>Delivery options and delivery speeds may vary for different locations</p>
                 <div class="pincode-input-group">
-                    <input type="text" id="pincodeInput" class="pincode-input" placeholder="Enter pincode (e.g. 210001)">
+                    <input type="text" id="pincodeInput" class="pincode-input" placeholder="Enter pincode (e.g. 212601)">
                     <button class="apply-btn" onclick="applyPincode()">Apply</button>
                 </div>
                 <div style="text-align: center; margin: 10px 0; color: #767676; font-size: 12px;">or</div>
@@ -309,7 +288,7 @@
                             <span class="currency">₹</span><span class="price">${p.price}</span>
                             <span class="mrp">M.R.P: ₹${p.mrp}</span>
                         </div>
-                        <div class="prime-badge">✓ Local Express Delivery</div>
+                        <div class="prime-badge">✓ Fatehpur Express Delivery</div>
                     </div>
                     <button class="add-to-cart-btn" onclick="addToCart(${p.id})">
                         ${p.category === 'Home Use Service' ? 'Book Service' : 'Add to Cart'}
@@ -358,12 +337,12 @@
         function selectType(type) {
             document.querySelectorAll('.choice-card').forEach(c => c.classList.remove('active'));
             if (type === 'all') {
-                document.getElementById('sectionHeader').innerText = "All Available Offerings";
+                document.getElementById('sectionHeader').innerText = "All Available Offerings in Fatehpur";
                 renderProducts(products);
             } else {
                 const card = document.getElementById(`card-${type}`);
                 if (card) card.classList.add('active');
-                document.getElementById('sectionHeader').innerText = `${type} Offerings`;
+                document.getElementById('sectionHeader').innerText = `${type} Offerings in Fatehpur`;
                 const filtered = products.filter(p => p.category === type);
                 renderProducts(filtered);
             }
