@@ -293,4 +293,182 @@
             { id: 9, name: "Premium Basmati Rice - 5kg Pack", category: "Kitchen Essentials", price: 549, mrp: 750, rating: "★★★★☆ (1,120)", image: "https://via.placeholder.com/200?text=Basmati+Rice" },
             { id: 10, name: "Stainless Steel Pressure Cooker 3L", category: "Kitchen Essentials", price: 1299, mrp: 1999, rating: "★★★★☆ (750)", image: "https://via.placeholder.com/200?text=Pressure+Cooker" },
             { id: 11, name: "Home Deep Cleaning Service", category: "Home Use Service", price: 1499, mrp: 2499, rating: "★★★★★ (450)", image: "https://via.placeholder.com/200?text=Deep+Cleaning" },
-            { id: 12, name: "AC Service & Repairing Visit", category: "Home Use Service", price: 499, mrp: 999, rating: "★★★★☆ (890)", image: "
+            { id: 12, name: "AC Service & Repairing Visit", category: "Home Use Service", price: 499, mrp: 999, rating: "★★★★☆ (890)", image: "https://via.placeholder.com/200?text=AC+Service" }
+        ];
+
+        let cart = [];
+        let loggedInUser = null;
+
+        // Auto Open Login Popup when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts(products);
+            setTimeout(() => {
+                openLoginModal();
+            }, 500); // 0.5 sec delay for smooth experience
+        });
+
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            if (items.length === 0) {
+                grid.innerHTML = "<p style='padding:20px;'>No items found in this category.</p>";
+                return;
+            }
+            grid.innerHTML = items.map(p => `
+                <div class="product-card">
+                    <div>
+                        <img src="${p.image}" alt="${p.name}">
+                        <div class="product-title">${p.name}</div>
+                        <div class="rating">${p.rating}</div>
+                        <div class="price-box">
+                            <span class="currency">₹</span><span class="price">${p.price}</span>
+                            <span class="mrp">M.R.P: ₹${p.mrp}</span>
+                        </div>
+                        <div class="prime-badge">✓ Fatehpur Express Delivery</div>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart(${p.id})">
+                        ${p.category === 'Home Use Service' ? 'Book Service' : 'Add to Cart'}
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'flex';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        function submitLogin() {
+            const contact = document.getElementById('userInputContact').value.trim();
+            if (!contact) {
+                alert("Please enter your Phone number or Email address.");
+                return;
+            }
+            loggedInUser = contact;
+            document.getElementById('userAccountNav').innerHTML = `<span>Hello, ${contact.split('@')[0]}</span><strong>My Account</strong>`;
+            alert("Logged in successfully as: " + contact);
+            closeLoginModal();
+        }
+
+        function scrollToCategories() {
+            document.getElementById('exploreCategoriesSec').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openLocationModal() {
+            document.getElementById('locationModal').style.display = 'flex';
+        }
+
+        function closeLocationModal() {
+            document.getElementById('locationModal').style.display = 'none';
+        }
+
+        function applyPincode() {
+            const pincode = document.getElementById('pincodeInput').value.trim();
+            if (pincode.length === 6) {
+                document.getElementById('headerLocation').innerText = `PIN: ${pincode}`;
+                closeLocationModal();
+            } else {
+                alert("Please enter a valid 6-digit PIN code");
+            }
+        }
+
+        function detectGPSLocation() {
+            if (!navigator.geolocation) {
+                alert("Geolocation is not supported by your browser");
+                return;
+            }
+            navigator.geolocation.getCurrentPosition((position) => {
+                const lat = position.coords.latitude.toFixed(2);
+                const lon = position.coords.longitude.toFixed(2);
+                document.getElementById('headerLocation').innerText = `GPS: ${lat}, ${lon}`;
+                closeLocationModal();
+            }, () => {
+                alert("Unable to retrieve your location. Please check permissions.");
+            });
+        }
+
+        function selectType(type) {
+            document.querySelectorAll('.choice-card').forEach(c => c.classList.remove('active'));
+            if (type === 'all') {
+                document.getElementById('sectionHeader').innerText = "All Available Offerings in Fatehpur";
+                renderProducts(products);
+            } else {
+                const card = document.getElementById(`card-${type}`);
+                if (card) card.classList.add('active');
+                document.getElementById('sectionHeader').innerText = `${type} Offerings in Fatehpur`;
+                const filtered = products.filter(p => p.category === type);
+                renderProducts(filtered);
+            }
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            cart.push(product);
+            updateCart();
+            toggleCart(true);
+        }
+
+        function updateCart() {
+            document.getElementById('cartCount').innerText = cart.length;
+            const container = document.getElementById('cartItems');
+            if (cart.length === 0) {
+                container.innerHTML = "<p>Your Cart is empty.</p>";
+            } else {
+                container.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item-row">
+                        <div>
+                            <div style="font-size:14px; font-weight:bold;">${item.name}</div>
+                            <div style="font-size:14px; color:#B12704; font-weight:bold;">₹${item.price}</div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" style="color:#007185; background:none; border:none; cursor:pointer;">Delete</button>
+                    </div>
+                `).join('');
+            }
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('cartTotal').innerText = total;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function toggleCart(openState) {
+            const drawer = document.getElementById('cartDrawer');
+            if (openState === true) {
+                drawer.classList.add('open');
+            } else {
+                drawer.classList.toggle('open');
+            }
+        }
+
+        function filterCategory(category) {
+            selectType(category);
+        }
+
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+            renderProducts(filtered);
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert("Please add items to cart!");
+                return;
+            }
+            if (!loggedInUser) {
+                alert("Please Sign In / Log In first to place your order!");
+                openLoginModal();
+                return;
+            }
+            alert("Order / Booking Placed Successfully for " + loggedInUser + "!");
+            cart = [];
+            updateCart();
+            toggleCart(false);
+        }
+    </script>
+</body>
+</html>
