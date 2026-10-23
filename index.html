@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BizBoost Local - Amazon Style Store</title>
+    <title>BizBoost Local - Official Store</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Arial', sans-serif; }
         body { background-color: #e3e6e6; color: #0f1111; }
 
-        /* Amazon Dark Header */
+        /* Dark Header */
         header { background-color: #131921; color: white; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; position: sticky; top: 0; z-index: 100; }
         
         .logo-container { display: flex; flex-direction: column; cursor: pointer; border: 1px solid transparent; padding: 4px 8px; border-radius: 2px; }
@@ -82,7 +82,7 @@
         .add-to-cart-btn { background-color: #ffd814; border: 1px solid #fcd200; border-radius: 20px; padding: 8px 12px; font-size: 13px; cursor: pointer; width: 100%; font-weight: 500; }
         .add-to-cart-btn:hover { background-color: #f7ca00; }
 
-        /* Amazon/Flipkart Style Location Modal */
+        /* Location Modal Popup */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 300; }
         .modal-box { background: white; width: 100%; max-width: 420px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.3); animation: fadeIn 0.3s ease; }
         .modal-header { background: #f0f2f2; padding: 15px 20px; font-size: 16px; font-weight: bold; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; }
@@ -114,14 +114,14 @@
 </head>
 <body>
 
-    <!-- Amazon Header -->
+    <!-- Header -->
     <header>
         <div class="logo-container">
             <h1>BizBoost</h1>
             <span>by JMD Group</span>
         </div>
 
-        <!-- Location Selector Button (Amazon Style) -->
+        <!-- Location Selector Button -->
         <div class="deliver-to" onclick="openLocationModal()">
             <span>📍</span>
             <div class="deliver-text">
@@ -139,7 +139,7 @@
                 <option value="Kitchen Essentials">Kitchen Essentials</option>
                 <option value="Home Use Service">Home Use Services</option>
             </select>
-            <input type="text" class="search-input" id="searchInput" onkeyup="filterProducts()" placeholder="Search BizBoost Amazon Store...">
+            <input type="text" class="search-input" id="searchInput" onkeyup="filterProducts()" placeholder="Search BizBoost Store...">
             <button class="search-btn">🔍</button>
         </div>
 
@@ -218,7 +218,7 @@
         <div class="product-grid" id="productGrid"></div>
     </div>
 
-    <!-- Amazon/Flipkart Style Location Modal Popup -->
+    <!-- Location Modal Popup -->
     <div class="modal" id="locationModal">
         <div class="modal-box">
             <div class="modal-header">
@@ -266,148 +266,4 @@
             { id: 8, name: "Fortune Mustard Oil (Kachhi Ghani) - 1L", category: "Kitchen Essentials", price: 155, mrp: 180, rating: "★★★★★ (4,200)", image: "https://via.placeholder.com/200?text=Mustard+Oil" },
             { id: 9, name: "Premium Basmati Rice - 5kg Pack", category: "Kitchen Essentials", price: 549, mrp: 750, rating: "★★★★☆ (1,120)", image: "https://via.placeholder.com/200?text=Basmati+Rice" },
             { id: 10, name: "Stainless Steel Pressure Cooker 3L", category: "Kitchen Essentials", price: 1299, mrp: 1999, rating: "★★★★☆ (750)", image: "https://via.placeholder.com/200?text=Pressure+Cooker" },
-            { id: 11, name: "Home Deep Cleaning Service", category: "Home Use Service", price: 1499, mrp: 2499, rating: "★★★★★ (450)", image: "https://via.placeholder.com/200?text=Deep+Cleaning" },
-            { id: 12, name: "AC Service & Repairing Visit", category: "Home Use Service", price: 499, mrp: 999, rating: "★★★★☆ (890)", image: "https://via.placeholder.com/200?text=AC+Service" }
-        ];
-
-        let cart = [];
-
-        function renderProducts(items) {
-            const grid = document.getElementById('productGrid');
-            if (items.length === 0) {
-                grid.innerHTML = "<p style='padding:20px;'>No items found in this category.</p>";
-                return;
-            }
-            grid.innerHTML = items.map(p => `
-                <div class="product-card">
-                    <div>
-                        <img src="${p.image}" alt="${p.name}">
-                        <div class="product-title">${p.name}</div>
-                        <div class="rating">${p.rating}</div>
-                        <div class="price-box">
-                            <span class="currency">₹</span><span class="price">${p.price}</span>
-                            <span class="mrp">M.R.P: ₹${p.mrp}</span>
-                        </div>
-                        <div class="prime-badge">✓prime Local Express Delivery</div>
-                    </div>
-                    <button class="add-to-cart-btn" onclick="addToCart(${p.id})">
-                        ${p.category === 'Home Use Service' ? 'Book Service' : 'Add to Cart'}
-                    </button>
-                </div>
-            `).join('');
-        }
-
-        // Location Modal Functions (Amazon/Flipkart Style)
-        function openLocationModal() {
-            document.getElementById('locationModal').style.display = 'flex';
-        }
-
-        function closeLocationModal() {
-            document.getElementById('locationModal').style.display = 'none';
-        }
-
-        function applyPincode() {
-            const pincode = document.getElementById('pincodeInput').value.trim();
-            if (pincode.length === 6) {
-                document.getElementById('headerLocation').innerText = `PIN: ${pincode}`;
-                closeLocationModal();
-            } else {
-                alert("Please enter a valid 6-digit PIN code");
-            }
-        }
-
-        function detectGPSLocation() {
-            if (!navigator.geolocation) {
-                alert("Geolocation is not supported by your browser");
-                return;
-            }
-            navigator.geolocation.getCurrentPosition((position) => {
-                const lat = position.coords.latitude.toFixed(2);
-                const lon = position.coords.longitude.toFixed(2);
-                document.getElementById('headerLocation').innerText = `GPS: ${lat}, ${lon}`;
-                closeLocationModal();
-            }, () => {
-                alert("Unable to retrieve your location. Please check permissions.");
-            });
-        }
-
-        function selectType(type) {
-            document.querySelectorAll('.choice-card').forEach(c => c.classList.remove('active'));
-            if (type === 'all') {
-                document.getElementById('sectionHeader').innerText = "All Available Offerings";
-                renderProducts(products);
-            } else {
-                const card = document.getElementById(`card-${type}`);
-                if (card) card.classList.add('active');
-                document.getElementById('sectionHeader').innerText = `${type} Offerings`;
-                const filtered = products.filter(p => p.category === type);
-                renderProducts(filtered);
-            }
-        }
-
-        function addToCart(id) {
-            const product = products.find(p => p.id === id);
-            cart.push(product);
-            updateCart();
-            toggleCart(true);
-        }
-
-        function updateCart() {
-            document.getElementById('cartCount').innerText = cart.length;
-            const container = document.getElementById('cartItems');
-            if (cart.length === 0) {
-                container.innerHTML = "<p>Your Cart is empty.</p>";
-            } else {
-                container.innerHTML = cart.map((item, index) => `
-                    <div class="cart-item-row">
-                        <div>
-                            <div style="font-size:14px; font-weight:bold;">${item.name}</div>
-                            <div style="font-size:14px; color:#B12704; font-weight:bold;">₹${item.price}</div>
-                        </div>
-                        <button onclick="removeFromCart(${index})" style="color:#007185; background:none; border:none; cursor:pointer;">Delete</button>
-                    </div>
-                `).join('');
-            }
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            document.getElementById('cartTotal').innerText = total;
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
-        }
-
-        function toggleCart(openState) {
-            const drawer = document.getElementById('cartDrawer');
-            if (openState === true) {
-                drawer.classList.add('open');
-            } else {
-                drawer.classList.toggle('open');
-            }
-        }
-
-        function filterCategory(category) {
-            selectType(category);
-        }
-
-        function filterProducts() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = products.filter(p => p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
-            renderProducts(filtered);
-        }
-
-        function checkout() {
-            if (cart.length === 0) {
-                alert("Please add items to cart!");
-                return;
-            }
-            alert("Order / Booking Placed Successfully!");
-            cart = [];
-            updateCart();
-            toggleCart(false);
-        }
-
-        renderProducts(products);
-    </script>
-</body>
-</html>
+            { id: 11,
