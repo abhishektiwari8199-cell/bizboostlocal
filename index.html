@@ -3,232 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BizBoost Local - Flipkart Style Store</title>
+    <title>BizBoost Local - Amazon Style Store</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Roboto, Arial, sans-serif; }
-        body { background-color: #f1f2f6; color: #212121; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Arial', sans-serif; }
+        body { background-color: #e3e6e6; color: #0f1111; }
 
-        /* Flipkart Blue Header */
-        header { background-color: #2874f0; color: white; padding: 10px 15%; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        .logo-container h1 { font-size: 20px; font-style: italic; font-weight: bold; }
-        .logo-container span { font-size: 11px; color: #ffe500; font-style: italic; }
+        /* Amazon Dark Header */
+        header { background-color: #131921; color: white; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; position: sticky; top: 0; z-index: 100; }
         
-        .search-box { display: flex; width: 45%; }
-        .search-box input { width: 100%; padding: 8px 16px; border: none; border-radius: 2px 0 0 2px; outline: none; font-size: 14px; }
-        .search-box button { background-color: white; border: none; padding: 8px 12px; color: #2874f0; cursor: pointer; border-radius: 0 2px 2px 0; font-weight: bold; }
+        .logo-container { display: flex; flex-direction: column; cursor: pointer; border: 1px solid transparent; padding: 4px 8px; border-radius: 2px; }
+        .logo-container:hover { border-color: white; }
+        .logo-container h1 { font-size: 22px; font-weight: bold; color: white; line-height: 1; }
+        .logo-container span { font-size: 11px; color: #ff9900; font-weight: bold; margin-top: 2px; }
 
-        .header-actions { display: flex; align-items: center; gap: 20px; }
-        .login-btn { background-color: white; color: #2874f0; border: 1px solid white; padding: 5px 25px; font-weight: 500; cursor: pointer; border-radius: 2px; }
-        .cart-btn { background: none; border: none; color: white; font-size: 16px; cursor: pointer; font-weight: 500; position: relative; }
-        .cart-badge { background-color: #ff9f00; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; position: absolute; top: -8px; right: -12px; font-weight: bold; }
+        /* Deliver To Box */
+        .deliver-to { display: flex; align-items: center; gap: 5px; cursor: pointer; border: 1px solid transparent; padding: 4px 8px; border-radius: 2px; }
+        .deliver-to:hover { border-color: white; }
+        .deliver-text { display: flex; flex-direction: column; font-size: 12px; color: #ccc; }
+        .deliver-text strong { color: white; font-size: 14px; }
 
-        /* Categories Bar */
-        .categories { background-color: white; display: flex; justify-content: space-around; padding: 12px 10%; box-shadow: 0 1px 1px 0 rgba(0,0,0,.16); margin-bottom: 10px; overflow-x: auto; }
-        .cat-item { text-align: center; cursor: pointer; font-size: 13px; font-weight: 500; }
-        .cat-item img { width: 40px; height: 40px; display: block; margin: 0 auto 4px; }
+        /* Search Bar */
+        .search-container { display: flex; flex-grow: 1; max-width: 700px; height: 40px; }
+        .search-category { background-color: #f3f3f3; border: none; border-radius: 4px 0 0 4px; padding: 0 10px; font-size: 12px; color: #555; cursor: pointer; border-right: 1px solid #cdcdcd; }
+        .search-input { width: 100%; border: none; padding: 0 12px; font-size: 15px; outline: none; }
+        .search-btn { background-color: #febd69; border: none; padding: 0 16px; border-radius: 0 4px 4px 0; cursor: pointer; font-size: 18px; }
+        .search-btn:hover { background-color: #f3a847; }
 
-        /* Container */
-        .main-container { padding: 0 10%; }
+        /* Header Right Actions */
+        .header-nav { display: flex; align-items: center; gap: 15px; }
+        .nav-item { display: flex; flex-direction: column; font-size: 12px; color: white; cursor: pointer; border: 1px solid transparent; padding: 4px 8px; border-radius: 2px; }
+        .nav-item:hover { border-color: white; }
+        .nav-item strong { font-size: 14px; font-weight: bold; }
+
+        .cart-btn { display: flex; align-items: center; color: white; text-decoration: none; font-weight: bold; cursor: pointer; position: relative; border: 1px solid transparent; padding: 4px 8px; border-radius: 2px; }
+        .cart-btn:hover { border-color: white; }
+        .cart-count { color: #f08804; font-size: 16px; font-weight: bold; margin-left: 4px; }
+
+        /* Amazon Sub Navigation Bar */
+        .sub-nav { background-color: #232f3e; color: white; display: flex; align-items: center; gap: 15px; padding: 8px 20px; font-size: 14px; overflow-x: auto; white-space: nowrap; }
+        .sub-nav-item { cursor: pointer; padding: 4px 8px; border: 1px solid transparent; border-radius: 2px; }
+        .sub-nav-item:hover { border-color: white; }
+        .sub-nav-item.bold { font-weight: bold; }
+
+        /* Main Container */
+        .main-container { max-width: 1500px; margin: 0 auto; padding: 15px; }
 
         /* Banner */
-        .banner { background: linear-gradient(90deg, #2874f0, #00d2ff); color: white; padding: 25px; border-radius: 4px; margin-bottom: 15px; text-align: center; }
-        .banner h2 { font-size: 24px; margin-bottom: 5px; }
+        .banner { background: linear-gradient(to bottom, #232f3e, #e3e6e6); padding: 30px 20px; border-radius: 4px; margin-bottom: 20px; color: white; text-align: center; }
+        .banner h2 { font-size: 26px; color: #febd69; margin-bottom: 5px; }
 
-        /* Products Grid */
-        .section-title { font-size: 18px; font-weight: bold; margin: 15px 0 10px; background: white; padding: 15px; border-bottom: 1px solid #f0f0f0; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; background: white; padding: 15px; }
-        .product-card { border: 1px solid #f0f0f0; padding: 12px; text-align: center; background: white; transition: transform 0.2s, box-shadow 0.2s; border-radius: 2px; }
-        .product-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px 0 rgba(0,0,0,0.12); }
-        .product-card img { width: 100%; height: 160px; object-fit: contain; margin-bottom: 10px; }
-        .product-title { font-size: 14px; font-weight: 500; height: 36px; overflow: hidden; margin-bottom: 5px; }
-        .product-price { font-size: 16px; font-weight: bold; color: #212121; }
-        .product-original-price { font-size: 12px; color: #878787; text-decoration: line-through; margin-left: 5px; }
-        .product-discount { font-size: 12px; color: #388e3c; font-weight: bold; margin-left: 5px; }
-        .add-cart-btn { background-color: #ff9f00; color: white; border: none; padding: 8px 12px; width: 100%; margin-top: 10px; cursor: pointer; font-weight: bold; border-radius: 2px; }
-        .add-cart-btn:hover { background-color: #f39600; }
+        /* Grid Layout */
+        .products-section-title { font-size: 20px; font-weight: bold; margin-bottom: 15px; background: white; padding: 15px; border-radius: 4px 4px 0 0; border-bottom: 1px solid #ddd; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; background: white; padding: 20px; border-radius: 0 0 4px 4px; margin-bottom: 20px; }
+        
+        /* Product Card */
+        .product-card { border: 1px solid #e7e7e7; padding: 15px; border-radius: 4px; background: white; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s; }
+        .product-card:hover { transform: translateY(-3px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .product-card img { width: 100%; height: 180px; object-fit: contain; margin-bottom: 10px; }
+        .product-title { font-size: 14px; line-height: 1.3; height: 38px; overflow: hidden; margin-bottom: 8px; font-weight: 500; }
+        .rating { color: #ffa41c; font-size: 13px; margin-bottom: 5px; }
+        .price-box { margin-bottom: 10px; }
+        .currency { font-size: 12px; vertical-align: super; }
+        .price { font-size: 20px; font-weight: bold; color: #0f1111; }
+        .mrp { font-size: 12px; color: #565959; text-decoration: line-through; margin-left: 5px; }
+        .prime-badge { color: #00a8e1; font-size: 12px; font-weight: bold; font-style: italic; margin-bottom: 8px; }
+        .add-to-cart-btn { background-color: #ffd814; border: 1px solid #fcd200; border-radius: 20px; padding: 8px 12px; font-size: 13px; cursor: pointer; width: 100%; font-weight: 500; }
+        .add-to-cart-btn:hover { background-color: #f7ca00; }
 
         /* Cart Side Drawer */
-        .cart-drawer { position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background: white; box-shadow: -2px 0 5px rgba(0,0,0,0.2); transition: 0.3s; z-index: 200; padding: 20px; display: flex; flex-direction: column; }
+        .cart-drawer { position: fixed; top: 0; right: -420px; width: 380px; height: 100%; background: white; box-shadow: -2px 0 10px rgba(0,0,0,0.2); transition: 0.3s; z-index: 200; padding: 20px; display: flex; flex-direction: column; }
         .cart-drawer.open { right: 0; }
-        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; padding-bottom: 12px; }
         .cart-items { flex-grow: 1; overflow-y: auto; margin: 15px 0; }
         .cart-item-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .buy-now-btn { background-color: #fb641b; color: white; border: none; padding: 12px; width: 100%; font-size: 16px; font-weight: bold; cursor: pointer; border-radius: 2px; }
+        .checkout-btn { background-color: #ffd814; border: 1px solid #fcd200; border-radius: 20px; padding: 12px; width: 100%; font-size: 15px; font-weight: bold; cursor: pointer; }
 
-        @media (max-width: 768px) {
-            header { padding: 10px 5%; }
-            .search-box { display: none; }
-            .main-container { padding: 0 2%; }
-            .categories { padding: 10px 2%; }
+        @media (max-width: 900px) {
+            .deliver-to, .search-category { display: none; }
+            header { padding: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Flipkart Header -->
+    <!-- Amazon Header -->
     <header>
         <div class="logo-container">
             <h1>BizBoost</h1>
-            <span>By JMD GROUP</span>
+            <span>BY JMD Group</span>
         </div>
 
-        <div class="search-box">
-            <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Search for products, brands and local stores...">
-            <button>🔍</button>
+        <div class="deliver-to">
+            <span>📍</span>
+            <div class="deliver-text">
+                <span>Deliver to Local</span>
+                <strong>Select Address</strong>
+            </div>
         </div>
 
-        <div class="header-actions">
-            <button class="login-btn">Login</button>
-            <button class="cart-btn" onclick="toggleCart()">
-                🛒 Cart
-                <span class="cart-badge" id="cartCount">0</span>
-            </button>
-        </div>
-    </header>
-
-    <!-- Categories -->
-    <div class="categories">
-        <div class="cat-item" onclick="filterCategory('all')">
-            <img src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" alt="All"> All Items
-        </div>
-        <div class="cat-item" onclick="filterCategory('Electronics')">
-            <img src="https://cdn-icons-png.flaticon.com/512/689/689307.png" alt="Electronics"> Electronics
-        </div>
-        <div class="cat-item" onclick="filterCategory('Fashion')">
-            <img src="https://cdn-icons-png.flaticon.com/512/3050/3050239.png" alt="Fashion"> Fashion
-        </div>
-        <div class="cat-item" onclick="filterCategory('Grocery')">
-            <img src="https://cdn-icons-png.flaticon.com/512/3724/3724788.png" alt="Grocery"> Grocery
-        </div>
-    </div>
-
-    <!-- Main Container -->
-    <div class="main-container">
-        <!-- Banner -->
-        <div class="banner">
-            <h2>Support Local Stores - Best Offers Guaranteed!</h2>
-            <p>Get instant delivery from stores nearby you</p>
+        <div class="search-container">
+            <select class="search-category" id="categorySelect" onchange="filterCategory(this.value)">
+                <option value="all">All Categories</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Home & Kitchen">Home & Kitchen</option>
+                <option value="Grocery">Grocery</option>
+                <option value="Beauty & Personal Care">Beauty & Personal Care</option>
+                <option value="Sports & Fitness">Sports & Fitness</option>
+            </select>
+            <input type="text" class="search-input" id="searchInput" onkeyup="filterProducts()" placeholder="Search BizBoost Amazon Store...">
+            <button class="search-btn">🔍</button>
         </div>
 
-        <!-- Product Listing -->
-        <div class="section-title">Deals of the Day</div>
-        <div class="product-grid" id="productGrid"></div>
-    </div>
-
-    <!-- Cart Drawer -->
-    <div class="cart-drawer" id="cartDrawer">
-        <div class="cart-header">
-            <h3>My Cart</h3>
-            <button onclick="toggleCart()" style="background:none; border:none; font-size:20px; cursor:pointer;">✕</button>
-        </div>
-        <div class="cart-items" id="cartItems">
-            <p>Your cart is empty.</p>
-        </div>
-        <div style="border-top: 1px solid #ddd; padding-top: 10px;">
-            <h4>Total Amount: ₹<span id="cartTotal">0</span></h4>
-            <button class="buy-now-btn" onclick="checkout()" style="margin-top: 10px;">PLACE ORDER</button>
-        </div>
-    </div>
-
-    <script>
-        const products = [
-            { id: 1, name: "Wireless Bluetooth Headphones", category: "Electronics", price: 1499, originalPrice: 2999, discount: "50% off", image: "https://via.placeholder.com/200?text=Headphones" },
-            { id: 2, name: "Men's Cotton Casual Shirt", category: "Fashion", price: 699, originalPrice: 1299, discount: "46% off", image: "https://via.placeholder.com/200?text=Cotton+Shirt" },
-            { id: 3, name: "Pure Organic Honey 500g", category: "Grocery", price: 299, originalPrice: 450, discount: "33% off", image: "https://via.placeholder.com/200?text=Organic+Honey" },
-            { id: 4, name: "Smart Fitness Watch", category: "Electronics", price: 1999, originalPrice: 3999, discount: "50% off", image: "https://via.placeholder.com/200?text=Smart+Watch" },
-            { id: 5, name: "Handmade Ceramic Tea Cups", category: "Grocery", price: 399, originalPrice: 799, discount: "50% off", image: "https://via.placeholder.com/200?text=Tea+Cups" },
-            { id: 6, name: "Women's Designer Kurti", category: "Fashion", price: 899, originalPrice: 1799, discount: "50% off", image: "https://via.placeholder.com/200?text=Designer+Kurti" }
-        ];
-
-        let cart = [];
-
-        function renderProducts(items) {
-            const grid = document.getElementById('productGrid');
-            grid.innerHTML = items.map(p => `
-                <div class="product-card">
-                    <img src="${p.image}" alt="${p.name}">
-                    <div class="product-title">${p.name}</div>
-                    <div>
-                        <span class="product-price">₹${p.price}</span>
-                        <span class="product-original-price">₹${p.originalPrice}</span>
-                        <span class="product-discount">${p.discount}</span>
-                    </div>
-                    <button class="add-cart-btn" onclick="addToCart(${p.id})">ADD TO CART</button>
-                </div>
-            `).join('');
-        }
-
-        function addToCart(id) {
-            const product = products.find(p => p.id === id);
-            cart.push(product);
-            updateCart();
-            toggleCart(true);
-        }
-
-        function updateCart() {
-            document.getElementById('cartCount').innerText = cart.length;
-            const container = document.getElementById('cartItems');
-            
-            if (cart.length === 0) {
-                container.innerHTML = "<p>Your cart is empty.</p>";
-            } else {
-                container.innerHTML = cart.map((item, index) => `
-                    <div class="cart-item-row">
-                        <div>
-                            <div style="font-size:14px; font-weight:500;">${item.name}</div>
-                            <div style="font-size:14px; font-weight:bold;">₹${item.price}</div>
-                        </div>
-                        <button onclick="removeFromCart(${index})" style="color:red; background:none; border:none; cursor:pointer;">Remove</button>
-                    </div>
-                `).join('');
-            }
-
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            document.getElementById('cartTotal').innerText = total;
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
-        }
-
-        function toggleCart(openState) {
-            const drawer = document.getElementById('cartDrawer');
-            if (openState === true) {
-                drawer.classList.add('open');
-            } else {
-                drawer.classList.toggle('open');
-            }
-        }
-
-        function filterCategory(category) {
-            if (category === 'all') {
-                renderProducts(products);
-            } else {
-                const filtered = products.filter(p => p.category === category);
-                renderProducts(filtered);
-            }
-        }
-
-        function filterProducts() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = products.filter(p => p.name.toLowerCase().includes(query));
-            renderProducts(filtered);
-        }
-
-        function checkout() {
-            if (cart.length === 0) {
-                alert("Please add items to cart!");
-                return;
-            }
-            alert("Order Placed Successfully! Flipkart style order processing initiated.");
-            cart = [];
-            updateCart();
-            toggleCart(false);
-        }
-
-        // Initial Load
-        renderProducts(products);
-    </script>
-</body>
-</html>
+        <div class="header-nav">
+            <div class="nav-
