@@ -225,18 +225,17 @@
         <div class="product-grid" id="productGrid"></div>
     </div>
 
-    <!-- LOGIN / SIGNUP MODAL (Auto-Opens on Site Load) -->
+    <!-- LOGIN / OTP MODAL (Auto-Opens on Site Load) -->
     <div class="modal" id="loginModal">
         <div class="modal-box">
             <div class="modal-header">
-                <span id="loginModalTitle">Sign in / Register to BizBoost</span>
+                <span id="loginModalTitle">Sign in / Register with OTP</span>
                 <span onclick="closeLoginModal()" style="cursor:pointer; font-size:18px;">✕</span>
             </div>
-            <div class="modal-body">
-                <p>Welcome! Please enter your Mobile Number or Email address to continue.</p>
+            <div class="modal-body" id="loginBodyContent">
+                <p>Enter your Mobile Number or Email address to get OTP.</p>
                 <input type="text" id="userInputContact" class="input-field" placeholder="Mobile number or Email address">
-                <input type="password" id="userPassword" class="input-field" placeholder="Enter Password / OTP">
-                <button class="apply-btn" onclick="submitLogin()">Continue</button>
+                <button class="apply-btn" onclick="sendOTP()">Get OTP</button>
                 <div style="font-size:12px; color:#565959; margin-top:15px; text-align:center;">
                     By continuing, you agree to BizBoost's Conditions of Use and Privacy Notice.
                 </div>
@@ -298,13 +297,14 @@
 
         let cart = [];
         let loggedInUser = null;
+        let tempContact = "";
 
         // Auto Open Login Popup when page loads
         window.addEventListener('DOMContentLoaded', () => {
             renderProducts(products);
             setTimeout(() => {
                 openLoginModal();
-            }, 500); // 0.5 sec delay for smooth experience
+            }, 500);
         });
 
         function renderProducts(items) {
@@ -340,15 +340,33 @@
             document.getElementById('loginModal').style.display = 'none';
         }
 
-        function submitLogin() {
+        function sendOTP() {
             const contact = document.getElementById('userInputContact').value.trim();
             if (!contact) {
                 alert("Please enter your Phone number or Email address.");
                 return;
             }
-            loggedInUser = contact;
-            document.getElementById('userAccountNav').innerHTML = `<span>Hello, ${contact.split('@')[0]}</span><strong>My Account</strong>`;
-            alert("Logged in successfully as: " + contact);
+            tempContact = contact;
+            // Switch modal view to OTP input
+            document.getElementById('loginModalTitle').innerText = "Verify OTP";
+            document.getElementById('loginBodyContent').innerHTML = `
+                <p>Please enter the 6-digit OTP sent to <b>${contact}</b></p>
+                <input type="text" id="userOTP" class="input-field" placeholder="Enter 6-digit OTP (e.g. 123456)" maxlength="6">
+                <button class="apply-btn" onclick="verifyOTP()">Verify & Login</button>
+                <div style="font-size:12px; color:#007185; margin-top:15px; text-align:center; cursor:pointer;" onclick="openLoginModal()">Resend OTP</div>
+            `;
+            alert("Demo OTP sent! (You can enter any 6 digits like 123456)");
+        }
+
+        function verifyOTP() {
+            const otp = document.getElementById('userOTP').value.trim();
+            if (otp.length < 4) {
+                alert("Please enter a valid OTP.");
+                return;
+            }
+            loggedInUser = tempContact;
+            document.getElementById('userAccountNav').innerHTML = `<span>Hello, ${loggedInUser.split('@')[0]}</span><strong>My Account</strong>`;
+            alert("OTP Verified Successfully! Welcome to BizBoost.");
             closeLoginModal();
         }
 
@@ -460,7 +478,7 @@
                 return;
             }
             if (!loggedInUser) {
-                alert("Please Sign In / Log In first to place your order!");
+                alert("Please verify OTP / Log In first to place your order!");
                 openLoginModal();
                 return;
             }
