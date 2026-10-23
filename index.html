@@ -134,7 +134,6 @@
             <span>by JMD Group</span>
         </div>
 
-        <!-- Location Selector Button -->
         <div class="deliver-to" onclick="openLocationModal()">
             <span>📍</span>
             <div class="deliver-text">
@@ -157,7 +156,6 @@
         </div>
 
         <div class="header-nav">
-            <!-- Account Login / Signup Button -->
             <div class="nav-item" onclick="openLoginModal()" id="userAccountNav">
                 <span>Hello, Sign in</span>
                 <strong>Account & Lists</strong>
@@ -185,7 +183,7 @@
     <!-- Main Content Container -->
     <div class="main-container">
         
-        <!-- FATEHPUR SPECIAL MAIN HERO BANNER -->
+        <!-- MAIN HERO BANNER -->
         <div class="custom-hero-banner" onclick="scrollToCategories()">
             <img src="fatehpur-banner.jpg.jpeg" alt="BizBoost Local Fatehpur Banner">
         </div>
@@ -225,7 +223,7 @@
         <div class="product-grid" id="productGrid"></div>
     </div>
 
-    <!-- LOGIN / OTP MODAL (Auto-Opens on Site Load) -->
+    <!-- LOGIN / OTP MODAL -->
     <div class="modal" id="loginModal">
         <div class="modal-box">
             <div class="modal-header">
@@ -281,18 +279,73 @@
 
     <script>
         const products = [
+            // --- Men's Clothing (12 items) ---
             { id: 1, name: "Men's Cotton Casual Slim-Fit Shirt", category: "Mens Clothing", price: 699, mrp: 1299, rating: "★★★★☆ (850)", image: "https://via.placeholder.com/200?text=Mens+Shirt" },
             { id: 2, name: "Men's Premium Denim Jeans", category: "Mens Clothing", price: 999, mrp: 1999, rating: "★★★★☆ (620)", image: "https://via.placeholder.com/200?text=Mens+Jeans" },
-            { id: 3, name: "Women's Designer Ethnic Cotton Kurti", category: "Womens Clothing", price: 899, mrp: 1799, rating: "★★★★★ (980)", image: "https://via.placeholder.com/200?text=Womens+Kurti" },
-            { id: 4, name: "Women's Floral Printed Saree", category: "Womens Clothing", price: 1299, mrp: 2499, rating: "★★★★☆ (410)", image: "https://via.placeholder.com/200?text=Designer+Saree" },
-            { id: 5, name: "Fresh Local Potato (Aloo) - 2kg Pack", category: "Fresh Vegetables", price: 60, mrp: 80, rating: "★★★★★ (3,100)", image: "https://via.placeholder.com/200?text=Fresh+Potato" },
-            { id: 6, name: "Farm Fresh Tomato (Tamatar) - 1kg", category: "Fresh Vegetables", price: 40, mrp: 60, rating: "★★★★☆ (2,450)", image: "https://via.placeholder.com/200?text=Fresh+Tomato" },
-            { id: 7, name: "Fresh Red Onion (Pyaz) - 2kg Pack", category: "Fresh Vegetables", price: 70, mrp: 90, rating: "★★★★★ (1,890)", image: "https://via.placeholder.com/200?text=Fresh+Onion" },
-            { id: 8, name: "Fortune Mustard Oil (Kachhi Ghani) - 1L", category: "Kitchen Essentials", price: 155, mrp: 180, rating: "★★★★★ (4,200)", image: "https://via.placeholder.com/200?text=Mustard+Oil" },
-            { id: 9, name: "Premium Basmati Rice - 5kg Pack", category: "Kitchen Essentials", price: 549, mrp: 750, rating: "★★★★☆ (1,120)", image: "https://via.placeholder.com/200?text=Basmati+Rice" },
-            { id: 10, name: "Stainless Steel Pressure Cooker 3L", category: "Kitchen Essentials", price: 1299, mrp: 1999, rating: "★★★★☆ (750)", image: "https://via.placeholder.com/200?text=Pressure+Cooker" },
-            { id: 11, name: "Home Deep Cleaning Service", category: "Home Use Service", price: 1499, mrp: 2499, rating: "★★★★★ (450)", image: "https://via.placeholder.com/200?text=Deep+Cleaning" },
-            { id: 12, name: "AC Service & Repairing Visit", category: "Home Use Service", price: 499, mrp: 999, rating: "★★★★☆ (890)", image: "https://via.placeholder.com/200?text=AC+Service" }
+            { id: 3, name: "Men's Classic Polo T-Shirt", category: "Mens Clothing", price: 449, mrp: 999, rating: "★★★★☆ (430)", image: "https://via.placeholder.com/200?text=Polo+Tshirt" },
+            { id: 4, name: "Men's Formal Trouser Black", category: "Mens Clothing", price: 799, mrp: 1499, rating: "★★★★★ (510)", image: "https://via.placeholder.com/200?text=Formal+Trouser" },
+            { id: 5, name: "Men's Winter Hooded Sweatshirt", category: "Mens Clothing", price: 899, mrp: 1799, rating: "★★★★★ (720)", image: "https://via.placeholder.com/200?text=Hoodie" },
+            { id: 6, name: "Men's Kurta Pyjama Festive Set", category: "Mens Clothing", price: 1199, mrp: 2299, rating: "★★★★☆ (310)", image: "https://via.placeholder.com/200?text=Kurta+Pyjama" },
+            { id: 7, name: "Men's Cotton Cargo Shorts", category: "Mens Clothing", price: 549, mrp: 1099, rating: "★★★★☆ (280)", image: "https://via.placeholder.com/200?text=Cargo+Shorts" },
+            { id: 8, name: "Men's Sports Running Trackpants", category: "Mens Clothing", price: 499, mrp: 999, rating: "★★★★★ (950)", image: "https://via.placeholder.com/200?text=Trackpants" },
+            { id: 9, name: "Men's Leather Bomber Jacket", category: "Mens Clothing", price: 1999, mrp: 3999, rating: "★★★★★ (180)", image: "https://via.placeholder.com/200?text=Leather+Jacket" },
+            { id: 10, name: "Men's Checkered Casual Shirt", category: "Mens Clothing", price: 649, mrp: 1199, rating: "★★★★☆ (390)", image: "https://via.placeholder.com/200?text=Checkered+Shirt" },
+            { id: 11, name: "Men's Round Neck Plain T-Shirt", category: "Mens Clothing", price: 299, mrp: 699, rating: "★★★★☆ (1,200)", image: "https://via.placeholder.com/200?text=Plain+Tshirt" },
+            { id: 12, name: "Men's Stretchable Cotton Chinos", category: "Mens Clothing", price: 899, mrp: 1699, rating: "★★★★★ (410)", image: "https://via.placeholder.com/200?text=Chinos" },
+
+            // --- Women's Clothing (12 items) ---
+            { id: 13, name: "Women's Designer Ethnic Cotton Kurti", category: "Womens Clothing", price: 899, mrp: 1799, rating: "★★★★★ (980)", image: "https://via.placeholder.com/200?text=Womens+Kurti" },
+            { id: 14, name: "Women's Floral Printed Georgette Saree", category: "Womens Clothing", price: 1299, mrp: 2499, rating: "★★★★☆ (410)", image: "https://via.placeholder.com/200?text=Designer+Saree" },
+            { id: 15, name: "Women's Embroidered Anarkali Suit", category: "Womens Clothing", price: 1599, mrp: 2999, rating: "★★★★★ (670)", image: "https://via.placeholder.com/200?text=Anarkali+Suit" },
+            { id: 16, name: "Women's Casual Western Top", category: "Womens Clothing", price: 499, mrp: 999, rating: "★★★★☆ (350)", image: "https://via.placeholder.com/200?text=Western+Top" },
+            { id: 17, name: "Women's Stretchable Denim Jeans", category: "Womens Clothing", price: 849, mrp: 1699, rating: "★★★★☆ (530)", image: "https://via.placeholder.com/200?text=Womens+Jeans" },
+            { id: 18, name: "Women's Silk Bandhani Saree", category: "Womens Clothing", price: 1899, mrp: 3499, rating: "★★★★★ (290)", image: "https://via.placeholder.com/200?text=Silk+Saree" },
+            { id: 19, name: "Women's Cotton Palazzo & Kurta Set", category: "Womens Clothing", price: 1099, mrp: 2199, rating: "★★★★★ (810)", image: "https://via.placeholder.com/200?text=Palazzo+Set" },
+            { id: 20, name: "Women's Stylish Party Wear Gown", category: "Womens Clothing", price: 2199, mrp: 4599, rating: "★★★★★ (150)", image: "https://via.placeholder.com/200?text=Party+Gown" },
+            { id: 21, name: "Women's Woolen Winter Cardigan", category: "Womens Clothing", price: 999, mrp: 1899, rating: "★★★★☆ (220)", image: "https://via.placeholder.com/200?text=Cardigan" },
+            { id: 22, name: "Women's Leggings Combo (Pack of 3)", category: "Womens Clothing", price: 599, mrp: 1199, rating: "★★★★★ (1,400)", image: "https://via.placeholder.com/200?text=Leggings" },
+            { id: 23, name: "Women's Daily Wear Cotton Maxi Dress", category: "Womens Clothing", price: 799, mrp: 1499, rating: "★★★★☆ (310)", image: "https://via.placeholder.com/200?text=Maxi+Dress" },
+            { id: 24, name: "Women's Traditional Lehenga Choli", category: "Womens Clothing", price: 2999, mrp: 5999, rating: "★★★★★ (95)", image: "https://via.placeholder.com/200?text=Lehenga" },
+
+            // --- Fresh Vegetables (Sabji) (12 items) ---
+            { id: 25, name: "Fresh Local Potato (Aloo) - 2kg Pack", category: "Fresh Vegetables", price: 60, mrp: 80, rating: "★★★★★ (3,100)", image: "https://via.placeholder.com/200?text=Fresh+Potato" },
+            { id: 26, name: "Farm Fresh Tomato (Tamatar) - 1kg", category: "Fresh Vegetables", price: 40, mrp: 60, rating: "★★★★☆ (2,450)", image: "https://via.placeholder.com/200?text=Fresh+Tomato" },
+            { id: 27, name: "Fresh Red Onion (Pyaz) - 2kg Pack", category: "Fresh Vegetables", price: 70, mrp: 90, rating: "★★★★★ (1,890)", image: "https://via.placeholder.com/200?text=Fresh+Onion" },
+            { id: 28, name: "Fresh Green Cauliflower (Gobhi) - 1pc", category: "Fresh Vegetables", price: 35, mrp: 50, rating: "★★★★☆ (920)", image: "https://via.placeholder.com/200?text=Cauliflower" },
+            { id: 29, name: "Fresh Green Peas (Matar) - 500g", category: "Fresh Vegetables", price: 45, mrp: 65, rating: "★★★★★ (710)", image: "https://via.placeholder.com/200?text=Green+Peas" },
+            { id: 30, name: "Fresh Green Spinach (Palak) - 250g", category: "Fresh Vegetables", price: 20, mrp: 30, rating: "★★★★☆ (540)", image: "https://via.placeholder.com/200?text=Palak" },
+            { id: 31, name: "Fresh Carrot (Gajjar) - 1kg", category: "Fresh Vegetables", price: 50, mrp: 70, rating: "★★★★☆ (630)", image: "https://via.placeholder.com/200?text=Carrot" },
+            { id: 32, name: "Fresh Lemon (Nimbu) - 250g", category: "Fresh Vegetables", price: 30, mrp: 40, rating: "★★★★★ (1,150)", image: "https://via.placeholder.com/200?text=Lemon" },
+            { id: 33, name: "Fresh Green Coriander (Dhaniya) - 100g", category: "Fresh Vegetables", price: 15, mrp: 25, rating: "★★★★★ (2,300)", image: "https://via.placeholder.com/200?text=Coriander" },
+            { id: 34, name: "Fresh Green Chilli (Hari Mirch) - 250g", category: "Fresh Vegetables", price: 25, mrp: 35, rating: "★★★★☆ (840)", image: "https://via.placeholder.com/200?text=Green+Chilli" },
+            { id: 35, name: "Fresh Brinjal (Baingan) - 1kg", category: "Fresh Vegetables", price: 40, mrp: 60, rating: "★★★★☆ (410)", image: "https://via.placeholder.com/200?text=Brinjal" },
+            { id: 36, name: "Fresh Lady Finger (Bhindi) - 1kg", category: "Fresh Vegetables", price: 50, mrp: 75, rating: "★★★★★ (980)", image: "https://via.placeholder.com/200?text=Bhindi" },
+
+            // --- Kitchen Essentials (12 items) ---
+            { id: 37, name: "Fortune Mustard Oil (Kachhi Ghani) - 1L", category: "Kitchen Essentials", price: 155, mrp: 180, rating: "★★★★★ (4,200)", image: "https://via.placeholder.com/200?text=Mustard+Oil" },
+            { id: 38, name: "Premium Basmati Rice - 5kg Pack", category: "Kitchen Essentials", price: 549, mrp: 750, rating: "★★★★☆ (1,120)", image: "https://via.placeholder.com/200?text=Basmati+Rice" },
+            { id: 39, name: "Stainless Steel Pressure Cooker 3L", category: "Kitchen Essentials", price: 1299, mrp: 1999, rating: "★★★★☆ (750)", image: "https://via.placeholder.com/200?text=Pressure+Cooker" },
+            { id: 40, name: "Aashirvaad Shudh Chakki Atta - 5kg", category: "Kitchen Essentials", price: 240, mrp: 275, rating: "★★★★★ (5,600)", image: "https://via.placeholder.com/200?text=Wheat+Atta" },
+            { id: 41, name: "Tata Salt Vacuum Evaporated - 1kg", category: "Kitchen Essentials", price: 28, mrp: 30, rating: "★★★★★ (8,900)", image: "https://via.placeholder.com/200?text=Tata+Salt" },
+            { id: 42, name: "Toor Dal (Pigeon Peas) - 1kg Pack", category: "Kitchen Essentials", price: 145, mrp: 170, rating: "★★★★☆ (1,820)", image: "https://via.placeholder.com/200?text=Toor+Dal" },
+            { id: 43, name: "Refined Sunflower Oil - 1L Pouch", category: "Kitchen Essentials", price: 135, mrp: 160, rating: "★★★★☆ (2,100)", image: "https://via.placeholder.com/200?text=Sunflower+Oil" },
+            { id: 44, name: "Turmeric Powder (Haldi) - 500g", category: "Kitchen Essentials", price: 110, mrp: 140, rating: "★★★★★ (940)", image: "https://via.placeholder.com/200?text=Turmeric+Powder" },
+            { id: 45, name: "Non-Stick Dosa Tawa 28cm", category: "Kitchen Essentials", price: 699, mrp: 1299, rating: "★★★★☆ (630)", image: "https://via.placeholder.com/200?text=Dosa+Tawa" },
+            { id: 46, name: "Stainless Steel Dinner Set (24 Pcs)", category: "Kitchen Essentials", price: 1899, mrp: 3499, rating: "★★★★★ (320)", image: "https://via.placeholder.com/200?text=Dinner+Set" },
+            { id: 47, name: "Red Chilli Powder - 500g Pack", category: "Kitchen Essentials", price: 140, mrp: 180, rating: "★★★★☆ (790)", image: "https://via.placeholder.com/200?text=Chilli+Powder" },
+            { id: 48, name: "Madhur Pure & Hygienic Sugar - 5kg", category: "Kitchen Essentials", price: 230, mrp: 260, rating: "★★★★★ (3,400)", image: "https://via.placeholder.com/200?text=Sugar+Pack" },
+
+            // --- Home Use Services (10 items) ---
+            { id: 49, name: "Home Deep Cleaning Service", category: "Home Use Service", price: 1499, mrp: 2499, rating: "★★★★★ (450)", image: "https://via.placeholder.com/200?text=Deep+Cleaning" },
+            { id: 50, name: "AC Service & Repairing Visit", category: "Home Use Service", price: 499, mrp: 999, rating: "★★★★☆ (890)", image: "https://via.placeholder.com/200?text=AC+Service" },
+            { id: 51, name: "Expert Home Plumber Visit", category: "Home Use Service", price: 199, mrp: 399, rating: "★★★★☆ (620)", image: "https://via.placeholder.com/200?text=Plumber+Service" },
+            { id: 52, name: "Expert Home Electrician Visit", category: "Home Use Service", price: 199, mrp: 399, rating: "★★★★★ (780)", image: "https://via.placeholder.com/200?text=Electrician" },
+            { id: 53, name: "Water Purifier (RO) Service & Checkup", category: "Home Use Service", price: 349, mrp: 699, rating: "★★★★☆ (410)", image: "https://via.placeholder.com/200?text=RO+Service" },
+            { id: 54, name: "Sofa & Carpet Shampooing Cleaning", category: "Home Use Service", price: 799, mrp: 1499, rating: "★★★★★ (310)", image: "https://via.placeholder.com/200?text=Sofa+Cleaning" },
+            { id: 55, name: "Kitchen Chimney Deep Cleaning", category: "Home Use Service", price: 599, mrp: 1199, rating: "★★★★☆ (250)", image: "https://via.placeholder.com/200?text=Chimney+Cleaning" },
+            { id: 56, name: "Refrigerator Repair & Gas Check", category: "Home Use Service", price: 399, mrp: 799, rating: "★★★★☆ (190)", image: "https://via.placeholder.com/200?text=Fridge+Repair" },
+            { id: 57, name: "Washing Machine Repair Visit", category: "Home Use Service", price: 399, mrp: 799, rating: "★★★★★ (280)", image: "https://via.placeholder.com/200?text=Washing+Machine" },
+            { id: 58, name: "Home Pest Control Treatment", category: "Home Use Service", price: 999, mrp: 1999, rating: "★★★★★ (510)", image: "https://via.placeholder.com/200?text=Pest+Control" }
         ];
 
         let cart = [];
@@ -347,7 +400,6 @@
                 return;
             }
             tempContact = contact;
-            // Switch modal view to OTP input
             document.getElementById('loginModalTitle').innerText = "Verify OTP";
             document.getElementById('loginBodyContent').innerHTML = `
                 <p>Please enter the 6-digit OTP sent to <b>${contact}</b></p>
