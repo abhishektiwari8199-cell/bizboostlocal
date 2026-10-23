@@ -1,500 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>BizBoost Local | Digital Marketing Agency</title>
-
-    <meta name="description"
-        content="BizBoost Local helps restaurants, cafes, salons, gyms and local businesses grow online through Digital Marketing, Google Business Profile, SEO and Website Development.">
-
-    <link rel="stylesheet" href="style.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <script src="https://kit.fontawesome.com/6b0b4d9d30.js" crossorigin="anonymous"></script>
-
+    <title>BizBoost Local - E-Commerce Store</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f8fafc; color: #333; }
+        header { background-color: #1e293b; color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        header h1 { font-size: 1.5rem; }
+        .cart-btn { background-color: #2563eb; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 1rem; }
+        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .card { background: white; border-radius: 8px; border: 1px solid #e2e8f0; padding: 1rem; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 6px; }
+        .card h3 { margin: 0.8rem 0 0.4rem; font-size: 1.2rem; }
+        .card .store { color: #64748b; font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .card .price { font-size: 1.2rem; font-weight: bold; color: #16a34a; margin-bottom: 1rem; }
+        .add-btn { background-color: #16a34a; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 4px; cursor: pointer; width: 100%; font-weight: bold; }
+        .add-btn:hover { background-color: #15803d; }
+        
+        /* Modal Cart */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 2rem; border-radius: 8px; width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding: 0.8rem 0; }
+        .close-btn { background: #ef4444; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; }
+        .checkout-btn { background: #2563eb; color: white; border: none; width: 100%; padding: 0.8rem; border-radius: 6px; margin-top: 1rem; font-size: 1rem; cursor: pointer; }
+    </style>
 </head>
-
 <body>
 
-<header>
-
-<div class="logo">
-    <h2>BizBoost <span>Local</span></h2>
-</div>
-
-<nav>
-
-<ul>
-
-<li><a href="#home">Home</a></li>
-
-<li><a href="#about">About</a></li>
-
-<li><a href="#services">Services</a></li>
-
-<li><a href="#portfolio">Portfolio</a></li>
-
-<li><a href="#contact">Contact</a></li>
-
-</ul>
-
-</nav>
-
-<a href="https://wa.me/916387696356" class="btn">Get Started</a>
-
-</header>
-
-<section class="hero" id="home">
-
-<div class="hero-left">
-
-<h1>
-Grow Your Local Business
-<span>Online</span>
-</h1>
-
-<p>
-
-We help Restaurants, Cafes, Gyms, Salons,
-Clinics and Local Shops get more customers
-through Digital Marketing.
-
-</p>
-
-<div class="buttons">
-
-<a href="https://wa.me/6387696356" class="btn">
-Free Consultation
-</a>
-
-<a href="#services" class="btn2">
-Our Services
-</a>
-
-</div>
-
-</div>
-
-<div class="hero-image">
-    <img src="hero.png.png" alt="BizBoost Local">
-</div>
-
-</section>
-<!-- ================= ABOUT ================= -->
-
-<section class="about" id="about">
-
-<div class="container">
-
-<h2>About BizBoost Local</h2>
-
-<p>
-BizBoost Local is a Digital Marketing Agency dedicated to helping local businesses
-grow online. Whether you own a restaurant, salon, gym, clinic, café or retail shop,
-we help you increase your online visibility, attract more customers and grow your revenue.
-</p>
-
-<div class="about-boxes">
-
-<div class="box">
-<h3>500+</h3>
-<p>Businesses to Target</p>
-</div>
-
-<div class="box">
-<h3>100%</h3>
-<p>Customized Strategy</p>
-</div>
-
-<div class="box">
-<h3>24/7</h3>
-<p>Customer Support</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ================= SERVICES ================= -->
-
-<section class="services" id="services">
-
-<div class="container">
-
-<h2>Our Services</h2>
-
-<div class="service-grid">
-
-<div class="card">
-<h3>📱 Social Media Management</h3>
-<p>Professional Instagram & Facebook management.</p>
-</div>
-
-<div class="card">
-<h3>🎥 Reels & Content</h3>
-<p>Creative posts, reels and promotional videos.</p>
-</div>
-
-<div class="card">
-<h3>📍 Google Business Profile</h3>
-<p>Appear on Google Search & Maps.</p>
-</div>
-
-<div class="card">
-<h3>🌐 Website Development</h3>
-<p>Modern responsive business websites.</p>
-</div>
-
-<div class="card">
-<h3>🚀 Local SEO</h3>
-<p>Rank your business locally on Google.</p>
-</div>
-
-<div class="card">
-<h3>📢 Paid Advertising</h3>
-<p>Generate more leads with Meta & Google Ads.</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ================= WHY US ================= -->
-
-<section class="why-us">
-
-<div class="container">
-
-<h2>Why Choose BizBoost Local?</h2>
-
-<div class="why-grid">
-
-<div class="why-card">
-✅ Affordable Pricing
-</div>
-
-<div class="why-card">
-📈 More Customers
-</div>
-
-<div class="why-card">
-⚡ Fast Delivery
-</div>
-
-<div class="why-card">
-🤝 Dedicated Support
-</div>
-
-<div class="why-card">
-📊 Growth Focused
-</div>
-
-<div class="why-card">
-💼 Professional Branding
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ================= PORTFOLIO ================= -->
-
-<section class="portfolio" id="portfolio">
-
-<div class="container">
-
-<h2>Businesses We Help</h2>
-
-<div class="portfolio-grid">
-
-<div class="portfolio-card">
-🍽️ Restaurants
-</div>
-
-<div class="portfolio-card">
-☕ Cafés
-</div>
-
-<div class="portfolio-card">
-💇 Salons
-</div>
-
-<div class="portfolio-card">
-🏋️ Gyms
-</div>
-
-<div class="portfolio-card">
-🏥 Clinics
-</div>
-
-<div class="portfolio-card">
-🛍️ Retail Shops
-</div>
-
-</div>
-
-</div>
-
-</section>
-<!-- ================= TESTIMONIALS ================= -->
-
-<section class="testimonials">
-
-<div class="container">
-
-<h2>What Businesses Say</h2>
-
-<div class="testimonial-grid">
-
-<div class="testimonial-card">
-⭐⭐⭐⭐⭐
-<p>
-"BizBoost Local helped us improve our online presence. We started getting more customer inquiries within weeks."
-</p>
-<h4>- Restaurant Owner</h4>
-</div>
-
-<div class="testimonial-card">
-⭐⭐⭐⭐⭐
-<p>
-"Our Instagram looks professional now and customers trust our brand more."
-</p>
-<h4>- Salon Owner</h4>
-</div>
-
-<div class="testimonial-card">
-⭐⭐⭐⭐⭐
-<p>
-"Affordable service with great support. Highly recommended."
-</p>
-<h4>- Gym Owner</h4>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ================= PRICING ================= -->
-
-<section class="pricing">
-
-<div class="container">
-
-<h2>Our Packages</h2>
-
-<div class="pricing-grid">
-
-<div class="price-card">
-<h3>Starter</h3>
-<h1>₹999</h1>
-<p>Perfect for New Businesses</p>
-
-<ul>
-<li>Instagram Setup</li>
-<li>5 Creative Posts</li>
-<li>Google Business Profile</li>
-</ul>
-
-<a href="https://wa.me/6387696356" class="btn">
-Get Started
-</a>
-
-</div>
-
-<div class="price-card featured">
-
-<h3>Growth</h3>
-
-<h1>₹2999</h1>
-
-<p>Most Popular</p>
-
-<ul>
-
-<li>15 Social Posts</li>
-
-<li>Reels</li>
-
-<li>Google Optimization</li>
-
-<li>WhatsApp Marketing</li>
-
-</ul>
-
-<a href="https://wa.me/6387696356" class="btn">
-
-Choose Plan
-
-</a>
-
-</div>
-
-<div class="price-card">
-
-<h3>Premium</h3>
-
-<h1>Custom</h1>
-
-<p>Complete Digital Growth</p>
-
-<ul>
-
-<li>Website</li>
-
-<li>SEO</li>
-
-<li>Paid Ads</li>
-
-<li>Full Marketing</li>
-
-</ul>
-
-<a href="https://wa.me/6387696356" class="btn">
-
-Contact Us
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ================= CONTACT ================= -->
-
-<section class="contact" id="contact">
-
-<div class="container">
-
-<h2>Contact Us</h2>
-
-<form>
-
-<input type="text" placeholder="Your Name">
-
-<input type="email" placeholder="Email Address">
-
-<input type="text" placeholder="Business Name">
-
-<textarea placeholder="Tell us about your business"></textarea>
-
-<button type="submit" class="btn">
-
-Send Message
-
-</button>
-
-</form>
-
-</div>
-
-</section>
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-<h2>BizBoost <span>Local</span></h2>
-
-<p>
-Helping Local Businesses Grow Online 🚀
-</p>
-
-<p>
-
-📞 +91 6387696356
-
-</p>
-
-<p>
-
-📷 Instagram :
-@bizboostlocal
-
-</p>
-
-<p>
-
-© 2026 BizBoost Local. All Rights Reserved.
-
-</p>
-
-</footer>
-
-<!-- Founder Section -->
-<section class="founder">
-
-<div class="founder-container">
-
-    <div class="founder-image">
-        <img src="founder.jpeg" alt="Abhishek Tiwari">
+    <header>
+        <h1>BizBoost Local Store</h1>
+        <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</button>
+    </header>
+
+    <div class="container">
+        <h2 style="margin-bottom: 1.5rem;">Explore Local Products</h2>
+        <div class="grid" id="product-list"></div>
     </div>
 
-    <div class="founder-content">
-
-        <h2>Meet The Founder</h2>
-
-        <h3>Abhishek Tiwari</h3>
-
-        <h4>Founder • BizBoost Local</h4>
-
-        <p>
-            Hi, I'm Abhishek Tiwari, founder of BizBoost Local.
-            I started this agency with one simple mission—to help local businesses
-            grow online and get the recognition they deserve.
-        </p>
-
-        <p>
-            Many restaurants, cafés, salons, gyms and local shops provide amazing
-            services, but they lose customers simply because they don't have a
-            strong online presence.
-        </p>
-
-        <p>
-            Through BizBoost Local, I help businesses with websites, social media,
-            Google Business Profile, branding and digital marketing so they can
-            attract more customers and increase sales.
-        </p>
-
-        <blockquote>
-            "Your business deserves to be seen, trusted and chosen."
-        </blockquote>
-
-        <a href="https://wa.me/6387696356" class="btn">
-            Let's Grow Together
-        </a>
-
+    <!-- Cart Modal -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2>Your Cart</h2>
+                <button class="close-btn" onclick="toggleCart()">Close</button>
+            </div>
+            <div id="cart-items"></div>
+            <h3 style="margin-top: 1rem; text-align: right;">Total: ₹<span id="cart-total">0</span></h3>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Place Order</button>
+        </div>
     </div>
 
-</div>
+    <script>
+        const products = [
+            { id: 1, name: "Handcrafted Wooden Lamp", price: 1299, store: "Local Artisans", image: "https://via.placeholder.com/250?text=Wooden+Lamp" },
+            { id: 2, name: "Organic Honey 500g", price: 450, store: "Natural Farm Store", image: "https://via.placeholder.com/250?text=Organic+Honey" },
+            { id: 3, name: "Handloom Cotton Kurta", price: 899, store: "Desi Textiles", image: "https://via.placeholder.com/250?text=Cotton+Kurta" },
+            { id: 4, name: "Handmade Ceramic Mug", price: 350, store: "Clay Craft Co.", image: "https://via.placeholder.com/250?text=Ceramic+Mug" }
+        ];
 
-</section>
+        let cart = [];
 
-<a href="https://wa.me/6387696356" class="whatsapp">
-💬
-</a>
+        function renderProducts() {
+            const list = document.getElementById('product-list');
+            list.innerHTML = products.map(p => `
+                <div class="card">
+                    <img src="${p.image}" alt="${p.name}">
+                    <h3>${p.name}</h3>
+                    <div class="store">Sold by: ${p.store}</div>
+                    <div class="price">₹${p.price}</div>
+                    <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+                </div>
+            `).join('');
+        }
 
-<script src="script.js"></script>
+        function addToCart(id) {
+            const item = products.find(p => p.id === id);
+            cart.push(item);
+            updateCart();
+        }
 
+        function updateCart() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const cartItemsDiv = document.getElementById('cart-items');
+            
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+            } else {
+                cartItemsDiv.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item">
+                        <div>
+                            <strong>${item.name}</strong>
+                            <div>₹${item.price}</div>
+                        </div>
+                        <button class="close-btn" style="background:#dc2626;" onclick="removeFromCart(${index})">Remove</button>
+                    </div>
+                `).join('');
+            }
+
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('cart-total').innerText = total;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cart-modal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+            alert("Order Placed Successfully! Local business will contact you soon.");
+            cart = [];
+            updateCart();
+            toggleCart();
+        }
+
+        renderProducts();
+    </script>
 </body>
 </html>
-
