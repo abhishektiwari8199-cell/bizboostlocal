@@ -1,544 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BizBoost Local - Fatehpur Store</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Arial', sans-serif; }
-        body { background-color: #e3e6e6; color: #0f1111; }
-
-        /* Dark Header */
-        header { background-color: #131921; color: white; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; position: sticky; top: 0; z-index: 100; }
-        
-        .logo-container { display: flex; flex-direction: column; cursor: pointer; border: 1px solid transparent; padding: 4px 8px; border-radius: 2px; }
-        .logo-container:hover { border-color: white; }
-        .logo-container h1 { font-size: 22px; font-weight: bold; color: white; line-height: 1; }
-        .logo-container span { font-size: 11px; color: #ff9900; font-weight: bold; margin-top: 2px; }
-
-        .deliver-to { display: flex; align-items: center; gap: 5px; cursor: pointer; border: 1px solid transparent; padding: 4px 8px; border-radius: 2px; }
-        .deliver-to:hover { border-color: white; }
-        .deliver-text { display: flex; flex-direction: column; font-size: 12px; color: #ccc; }
-        .deliver-text strong { color: white; font-size: 14px; }
-
-        /* Search Bar */
-        .search-container { display: flex; flex-grow: 1; max-width: 700px; height: 40px; }
-        .search-category { background-color: #f3f3f3; border: none; border-radius: 4px 0 0 4px; padding: 0 10px; font-size: 12px; color: #555; cursor: pointer; border-right: 1px solid #cdcdcd; }
-        .search-input { width: 100%; border: none; padding: 0 12px; font-size: 15px; outline: none; }
-        .search-btn { background-color: #febd69; border: none; padding: 0 16px; border-radius: 0 4px 4px 0; cursor: pointer; font-size: 18px; }
-        .search-btn:hover { background-color: #f3a847; }
-
-        .header-nav { display: flex; align-items: center; gap: 15px; }
-        .nav-item { display: flex; flex-direction: column; font-size: 12px; color: white; cursor: pointer; border: 1px solid transparent; padding: 4px 8px; border-radius: 2px; }
-        .nav-item:hover { border-color: white; }
-        .nav-item strong { font-size: 14px; font-weight: bold; }
-
-        .cart-btn { display: flex; align-items: center; color: white; text-decoration: none; font-weight: bold; cursor: pointer; position: relative; border: 1px solid transparent; padding: 4px 8px; border-radius: 2px; }
-        .cart-btn:hover { border-color: white; }
-        .cart-count { color: #f08804; font-size: 16px; font-weight: bold; margin-left: 4px; }
-
-        /* Sub Navigation Bar */
-        .sub-nav { background-color: #232f3e; color: white; display: flex; align-items: center; gap: 15px; padding: 8px 20px; font-size: 14px; overflow-x: auto; white-space: nowrap; }
-        .sub-nav-item { cursor: pointer; padding: 4px 8px; border: 1px solid transparent; border-radius: 2px; }
-        .sub-nav-item:hover { border-color: white; }
-        .sub-nav-item.bold { font-weight: bold; }
-
-        /* Main Container */
-        .main-container { max-width: 1500px; margin: 0 auto; padding: 15px; }
-
-        /* MAIN HERO BANNER */
-        .custom-hero-banner {
-            width: 100%;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            cursor: pointer;
-            border: 2px solid #ff9900;
-        }
-        .custom-hero-banner img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* CATEGORY CARDS SECTION */
-        .choice-section-title { font-size: 20px; font-weight: bold; margin-bottom: 12px; color: #0f1111; }
-        .choice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 25px; }
-        .choice-card { background: white; padding: 18px 12px; border-radius: 6px; text-align: center; cursor: pointer; border: 2px solid transparent; transition: all 0.2s ease-in-out; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
-        .choice-card:hover { border-color: #e77600; transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
-        .choice-card.active { border-color: #007185; background-color: #f0f8f9; }
-        .choice-icon { font-size: 36px; margin-bottom: 8px; display: block; }
-        .choice-title { font-size: 15px; font-weight: bold; margin-bottom: 4px; color: #0f1111; }
-        .choice-desc { font-size: 12px; color: #565959; }
-
-        /* Grid Layout */
-        .products-section-title { font-size: 20px; font-weight: bold; margin-bottom: 15px; background: white; padding: 15px; border-radius: 4px 4px 0 0; border-bottom: 1px solid #ddd; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; background: white; padding: 20px; border-radius: 0 0 4px 4px; margin-bottom: 20px; }
-        
-        /* Product Card */
-        .product-card { border: 1px solid #e7e7e7; padding: 15px; border-radius: 4px; background: white; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s; }
-        .product-card:hover { transform: translateY(-3px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .product-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 4px; margin-bottom: 10px; }
-        .product-title { font-size: 14px; line-height: 1.3; height: 38px; overflow: hidden; margin-bottom: 8px; font-weight: 500; }
-        .rating { color: #ffa41c; font-size: 13px; margin-bottom: 5px; }
-        .price-box { margin-bottom: 10px; }
-        .currency { font-size: 12px; vertical-align: super; }
-        .price { font-size: 20px; font-weight: bold; color: #0f1111; }
-        .mrp { font-size: 12px; color: #565959; text-decoration: line-through; margin-left: 5px; }
-        .prime-badge { color: #00a8e1; font-size: 12px; font-weight: bold; font-style: italic; margin-bottom: 8px; }
-        .add-to-cart-btn { background-color: #ffd814; border: 1px solid #fcd200; border-radius: 20px; padding: 8px 12px; font-size: 13px; cursor: pointer; width: 100%; font-weight: 500; }
-        .add-to-cart-btn:hover { background-color: #f7ca00; }
-
-        /* General Modal Popup */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 300; }
-        .modal-box { background: white; width: 100%; max-width: 420px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.3); animation: fadeIn 0.3s ease; }
-        .modal-header { background: #f0f2f2; padding: 15px 20px; font-size: 16px; font-weight: bold; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; }
-        .modal-body { padding: 20px; }
-        .modal-body p { font-size: 13px; color: #565959; margin-bottom: 15px; line-height: 1.4; }
-        
-        .input-field { width: 100%; padding: 11px; border: 1px solid #a6b7d4; border-radius: 4px; font-size: 14px; outline: none; margin-bottom: 12px; }
-        .input-field:focus { border-color: #e77600; box-shadow: 0 0 3px rgba(228,121,17,0.5); }
-        
-        .pincode-input-group { display: flex; gap: 10px; margin-bottom: 15px; }
-        .pincode-input { flex-grow: 1; padding: 10px; border: 1px solid #a6b7d4; border-radius: 4px; font-size: 14px; outline: none; }
-        
-        .apply-btn { background-color: #ffd814; border: 1px solid #fcd200; border-radius: 4px; padding: 11px; font-weight: bold; cursor: pointer; font-size: 14px; width: 100%; margin-top: 5px; }
-        .apply-btn:hover { background-color: #f7ca00; }
-        
-        .gps-option { display: flex; align-items: center; gap: 8px; color: #007185; font-size: 14px; font-weight: bold; cursor: pointer; margin-top: 10px; background: none; border: none; }
-        .gps-option:hover { text-decoration: underline; }
-
-        /* Cart Side Drawer */
-        .cart-drawer { position: fixed; top: 0; right: -420px; width: 380px; height: 100%; background: white; box-shadow: -2px 0 10px rgba(0,0,0,0.2); transition: 0.3s; z-index: 200; padding: 20px; display: flex; flex-direction: column; }
-        .cart-drawer.open { right: 0; }
-        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; padding-bottom: 12px; }
-        .cart-items { flex-grow: 1; overflow-y: auto; margin: 15px 0; }
-        .cart-item-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .checkout-btn { background-color: #ffd814; border: 1px solid #fcd200; border-radius: 20px; padding: 12px; width: 100%; font-size: 15px; font-weight: bold; cursor: pointer; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-
-        @media (max-width: 900px) {
-            .deliver-to, .search-category { display: none; }
-            header { padding: 10px; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABHISHEK ENTERPRISES - Premium Dropshipping Footwear</title>
+  <!-- Tailwind CSS CDN for styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .badge {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 9999px;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 4px;
+    }
+  </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased custom-scroll">
 
-    <!-- Header -->
-    <header>
-        <div class="logo-container">
-            <h1>BizBoost</h1>
-            <span>by JMD Group</span>
-        </div>
-
-        <div class="deliver-to" onclick="openLocationModal()">
-            <span>📍</span>
-            <div class="deliver-text">
-                <span>Deliver to</span>
-                <strong id="headerLocation">Fatehpur</strong>
-            </div>
-        </div>
-
-        <div class="search-container">
-            <select class="search-category" id="categorySelect" onchange="filterCategory(this.value)">
-                <option value="all">All Categories</option>
-                <option value="Mens Clothing">Men's Clothing</option>
-                <option value="Womens Clothing">Women's Clothing</option>
-                <option value="Fresh Vegetables">Fresh Vegetables (Sabji)</option>
-                <option value="Kitchen Essentials">Kitchen Essentials</option>
-                <option value="Home Use Service">Home Use Services</option>
-            </select>
-            <input type="text" class="search-input" id="searchInput" onkeyup="filterProducts()" placeholder="Search BizBoost Store...">
-            <button class="search-btn">🔍</button>
-        </div>
-
-        <div class="header-nav">
-            <div class="nav-item" onclick="openLoginModal()" id="userAccountNav">
-                <span>Hello, Sign in</span>
-                <strong>Account & Lists</strong>
-            </div>
-            <div class="nav-item">
-                <span>Returns</span>
-                <strong>& Orders</strong>
-            </div>
-            <div class="cart-btn" onclick="toggleCart()">
-                🛒 Cart <span class="cart-count" id="cartCount">0</span>
-            </div>
-        </div>
-    </header>
-
-    <!-- Sub-Header Navigation -->
-    <div class="sub-nav">
-        <div class="sub-nav-item bold" onclick="selectType('all')">☰ All Products & Services</div>
-        <div class="sub-nav-item" onclick="selectType('Mens Clothing')">👔 Men's Clothing</div>
-        <div class="sub-nav-item" onclick="selectType('Womens Clothing')">👗 Women's Clothing</div>
-        <div class="sub-nav-item" onclick="selectType('Fresh Vegetables')">🥦 Sabji (Vegetables)</div>
-        <div class="sub-nav-item" onclick="selectType('Kitchen Essentials')">🍳 Kitchen Essentials</div>
-        <div class="sub-nav-item" onclick="selectType('Home Use Service')">🛠️ Home Services</div>
+  <!-- Top Switcher Bar (Storefront <-> Admin HQ) -->
+  <header class="bg-slate-900 text-white px-4 py-2 flex flex-wrap justify-between items-center text-xs sticky top-0 z-50 shadow-md">
+    <div class="flex items-center gap-2">
+      <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span class="font-bold tracking-wide uppercase text-slate-200">ABHISHEK ENTERPRISES</span>
+      <span class="text-slate-400 hidden sm:inline">| Dropship Pro Engine</span>
     </div>
-
-    <!-- Main Content Container -->
-    <div class="main-container">
-        
-        <!-- MAIN HERO BANNER -->
-        <div class="custom-hero-banner" onclick="scrollToCategories()">
-            <img src="fatehpur-banner.jpg.jpeg" alt="BizBoost Local Fatehpur Banner">
-        </div>
-
-        <!-- CATEGORY SELECTION CARDS -->
-        <div class="choice-section-title" id="exploreCategoriesSec">Explore Categories in Fatehpur:</div>
-        <div class="choice-grid">
-            <div class="choice-card" id="card-Mens Clothing" onclick="selectType('Mens Clothing')">
-                <span class="choice-icon">👔</span>
-                <div class="choice-title">Men's Clothing</div>
-                <div class="choice-desc">Shirts, T-Shirts & Jeans</div>
-            </div>
-            <div class="choice-card" id="card-Womens Clothing" onclick="selectType('Womens Clothing')">
-                <span class="choice-icon">👗</span>
-                <div class="choice-title">Women's Clothing</div>
-                <div class="choice-desc">Kurtis, Sarees & Ethnic Wear</div>
-            </div>
-            <div class="choice-card" id="card-Fresh Vegetables" onclick="selectType('Fresh Vegetables')">
-                <span class="choice-icon">🥦</span>
-                <div class="choice-title">Fresh Sabji (Vegetables)</div>
-                <div class="choice-desc">Potato, Tomato, Onion & Green Veggies</div>
-            </div>
-            <div class="choice-card" id="card-Kitchen Essentials" onclick="selectType('Kitchen Essentials')">
-                <span class="choice-icon">🍳</span>
-                <div class="choice-title">Kitchen Essentials</div>
-                <div class="choice-desc">Oil, Rice, Spices & Utensils</div>
-            </div>
-            <div class="choice-card" id="card-Home Use Service" onclick="selectType('Home Use Service')">
-                <span class="choice-icon">🛠️</span>
-                <div class="choice-title">Home Use Services</div>
-                <div class="choice-desc">AC Repair, Plumbing & Cleaning</div>
-            </div>
-        </div>
-
-        <!-- PRODUCT / SERVICE LISTING -->
-        <div class="products-section-title" id="sectionHeader">All Available Offerings in Fatehpur</div>
-        <div class="product-grid" id="productGrid"></div>
+    <div class="flex items-center gap-3">
+      <span class="text-slate-400">View Mode:</span>
+      <div class="bg-slate-800 p-1 rounded-lg flex border border-slate-700">
+        <button id="btn-customer-view" onclick="switchView('customer')" class="px-3 py-1 rounded bg-indigo-600 text-white font-medium transition">
+          Customer Storefront
+        </button>
+        <button id="btn-admin-view" onclick="switchView('admin')" class="px-3 py-1 rounded text-slate-300 hover:text-white font-medium transition">
+          Admin Operations HQ
+        </button>
+      </div>
     </div>
+  </header>
 
-    <!-- LOGIN / OTP MODAL -->
-    <div class="modal" id="loginModal">
-        <div class="modal-box">
-            <div class="modal-header">
-                <span id="loginModalTitle">Sign in / Register with OTP</span>
-                <span onclick="closeLoginModal()" style="cursor:pointer; font-size:18px;">✕</span>
-            </div>
-            <div class="modal-body" id="loginBodyContent">
-                <p>Enter your Mobile Number or Email address to get OTP.</p>
-                <input type="text" id="userInputContact" class="input-field" placeholder="Mobile number or Email address">
-                <button class="apply-btn" onclick="sendOTP()">Get OTP</button>
-                <div style="font-size:12px; color:#565959; margin-top:15px; text-align:center;">
-                    By continuing, you agree to BizBoost's Conditions of Use and Privacy Notice.
-                </div>
-            </div>
+  <!-- ========================================== -->
+  <!-- 1. CUSTOMER STOREFRONT (Jo Buyer ko Dikhega) -->
+  <!-- ========================================== -->
+  <div id="customer-view" class="block">
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-gray-200 sticky top-10 z-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-16 items-center">
+        <div class="flex items-center gap-4">
+          <a href="#" class="text-xl font-extrabold tracking-tight text-gray-900">ABHISHEK <span class="text-indigo-600">SHOES</span></a>
+          <div class="hidden md:flex space-x-6 text-sm font-medium text-gray-600 ml-6">
+            <button onclick="filterCategory('All')" class="hover:text-indigo-600">All Products</button>
+            <button onclick="filterCategory('Sneakers')" class="hover:text-indigo-600">Sneakers</button>
+            <button onclick="filterCategory('Sports')" class="hover:text-indigo-600">Sports Shoes</button>
+            <button onclick="filterCategory('Casual')" class="hover:text-indigo-600">Casuals</button>
+          </div>
         </div>
-    </div>
 
-    <!-- Location Modal Popup -->
-    <div class="modal" id="locationModal">
-        <div class="modal-box">
-            <div class="modal-header">
-                <span>Choose your location in Fatehpur</span>
-                <span onclick="closeLocationModal()" style="cursor:pointer; font-size:18px;">✕</span>
-            </div>
-            <div class="modal-body">
-                <p>Delivery options and delivery speeds may vary for different locations</p>
-                <div class="pincode-input-group">
-                    <input type="text" id="pincodeInput" class="pincode-input" placeholder="Enter pincode (e.g. 212601)">
-                    <button class="apply-btn" style="width:auto;" onclick="applyPincode()">Apply</button>
-                </div>
-                <div style="text-align: center; margin: 10px 0; color: #767676; font-size: 12px;">or</div>
-                <button class="gps-option" onclick="detectGPSLocation()">
-                    📍 Use my current location (GPS)
-                </button>
-            </div>
+        <div class="flex items-center gap-4">
+          <!-- Search Bar -->
+          <div class="relative hidden sm:block">
+            <input type="text" id="store-search" oninput="handleSearch(this.value)" placeholder="Search shoes..." class="bg-gray-100 rounded-full pl-9 pr-4 py-1.5 text-sm w-56 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3 top-2.5"></i>
+          </div>
+
+          <!-- Order Tracking Button -->
+          <button onclick="openTrackingModal()" class="text-sm font-medium text-gray-700 hover:text-indigo-600 flex items-center gap-1">
+            <i data-lucide="truck" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">Track Order</span>
+          </button>
+
+          <!-- Cart Icon -->
+          <button onclick="toggleCartDrawer(true)" class="relative p-2 text-gray-700 hover:text-indigo-600">
+            <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+            <span id="cart-count-badge" class="absolute top-0 right-0 bg-indigo-600 text-white badge">0</span>
+          </button>
         </div>
-    </div>
+      </div>
+    </nav>
 
-    <!-- Cart Side Drawer -->
-    <div class="cart-drawer" id="cartDrawer">
-        <div class="cart-header">
-            <h3>Shopping Cart / Bookings</h3>
-            <button onclick="toggleCart()" style="background:none; border:none; font-size:20px; cursor:pointer;">✕</button>
+    <!-- Hero Banner -->
+    <section class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+        <div class="space-y-4 max-w-xl">
+          <span class="bg-indigo-600 text-xs uppercase px-3 py-1 font-semibold rounded-full tracking-wider">Pan India Express Delivery</span>
+          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">Trending Sneaker & Shoe Collections</h1>
+          <p class="text-slate-300 text-sm sm:text-base">Premium comfort, street-style designs aur pure verified dropship quality. COD Available nationwide.</p>
+          <div class="flex gap-3">
+            <button onclick="document.getElementById('shop-section').scrollIntoView({behavior: 'smooth'})" class="px-6 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 font-semibold text-sm shadow-md transition">Explore Catalog</button>
+          </div>
         </div>
-        <div class="cart-items" id="cartItems">
-            <p>Your Cart is empty.</p>
+        <div class="w-full md:w-auto flex justify-center">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80" alt="Sneaker Hero" class="rounded-xl shadow-2xl max-h-64 object-cover transform -rotate-3 hover:rotate-0 transition duration-300">
         </div>
-        <div style="border-top: 1px solid #ddd; padding-top: 12px;">
-            <h4 style="margin-bottom: 10px;">Subtotal: ₹<span id="cartTotal">0</span></h4>
-            <button class="checkout-btn" onclick="checkout()">Proceed to Place Order</button>
+      </div>
+    </section>
+
+    <!-- Shop & Catalog Section -->
+    <main id="shop-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <!-- Filter and Sort Bar -->
+      <div class="flex flex-wrap justify-between items-center mb-6 pb-4 border-b border-gray-200 gap-4">
+        <div class="flex gap-2 items-center flex-wrap" id="category-pills">
+          <span class="text-xs font-semibold text-gray-500 uppercase mr-1">Categories:</span>
+          <button onclick="filterCategory('All')" class="cat-pill px-3 py-1 text-xs rounded-full bg-indigo-600 text-white font-medium">All</button>
+          <button onclick="filterCategory('Sneakers')" class="cat-pill px-3 py-1 text-xs rounded-full bg-gray-200 text-gray-700 font-medium hover:bg-gray-300">Sneakers</button>
+          <button onclick="filterCategory('Sports')" class="cat-pill px-3 py-1 text-xs rounded-full bg-gray-200 text-gray-700 font-medium hover:bg-gray-300">Sports</button>
+          <button onclick="filterCategory('Casual')" class="cat-pill px-3 py-1 text-xs rounded-full bg-gray-200 text-gray-700 font-medium hover:bg-gray-300">Casual</button>
         </div>
-    </div>
 
-    <script>
-        const products = [
-            // --- Men's Clothing (12 Real Image items) ---
-            { id: 1, name: "Men's Cotton Casual Slim-Fit Shirt", category: "Mens Clothing", price: 699, mrp: 1299, rating: "★★★★☆ (850)", image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400" },
-            { id: 2, name: "Men's Premium Blue Denim Jeans", category: "Mens Clothing", price: 999, mrp: 1999, rating: "★★★★☆ (620)", image: "https://images.unsplash.com/photo-1542272604-780c96856592?w=400" },
-            { id: 3, name: "Men's Classic Polo T-Shirt", category: "Mens Clothing", price: 449, mrp: 999, rating: "★★★★☆ (430)", image: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=400" },
-            { id: 4, name: "Men's Formal Trouser Black", category: "Mens Clothing", price: 799, mrp: 1499, rating: "★★★★★ (510)", image: "https://images.unsplash.com/photo-1479064555552-3ef4979f8908?w=400" },
-            { id: 5, name: "Men's Winter Hooded Sweatshirt", category: "Mens Clothing", price: 899, mrp: 1799, rating: "★★★★★ (720)", image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400" },
-            { id: 6, name: "Men's Kurta Pyjama Festive Set", category: "Mens Clothing", price: 1199, mrp: 2299, rating: "★★★★☆ (310)", image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400" },
-            { id: 7, name: "Men's Cotton Cargo Shorts", category: "Mens Clothing", price: 549, mrp: 1099, rating: "★★★★☆ (280)", image: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400" },
-            { id: 8, name: "Men's Sports Running Trackpants", category: "Mens Clothing", price: 499, mrp: 999, rating: "★★★★★ (950)", image: "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=400" },
-            { id: 9, name: "Men's Leather Jacket Brown", category: "Mens Clothing", price: 1999, mrp: 3999, rating: "★★★★★ (180)", image: "https://images.unsplash.com/photo-1520975954732-35dd22299614?w=400" },
-            { id: 10, name: "Men's Checkered Casual Shirt", category: "Mens Clothing", price: 649, mrp: 1199, rating: "★★★★☆ (390)", image: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=400" },
-            { id: 11, name: "Men's Round Neck Plain White T-Shirt", category: "Mens Clothing", price: 299, mrp: 699, rating: "★★★★☆ (1,200)", image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=400" },
-            { id: 12, name: "Men's Stretchable Cotton Chinos", category: "Mens Clothing", price: 899, mrp: 1699, rating: "★★★★★ (410)", image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=400" },
+        <div class="flex items-center gap-3">
+          <label class="text-xs text-gray-500 font-medium">Sort By:</label>
+          <select id="sort-select" onchange="handleSort(this.value)" class="text-xs border border-gray-300 rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+            <option value="featured">Featured</option>
+            <option value="low-high">Price: Low to High</option>
+            <option value="high-low">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
 
-            // --- Women's Clothing (12 Real Image items) ---
-            { id: 13, name: "Women's Designer Ethnic Cotton Kurti", category: "Womens Clothing", price: 899, mrp: 1799, rating: "★★★★★ (980)", image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=400" },
-            { id: 14, name: "Women's Floral Printed Saree", category: "Womens Clothing", price: 1299, mrp: 2499, rating: "★★★★☆ (410)", image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400" },
-            { id: 15, name: "Women's Embroidered Anarkali Suit", category: "Womens Clothing", price: 1599, mrp: 2999, rating: "★★★★★ (670)", image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=400" },
-            { id: 16, name: "Women's Casual Western Top", category: "Womens Clothing", price: 499, mrp: 999, rating: "★★★★☆ (350)", image: "https://images.unsplash.com/photo-1564584217132-2271feaeb3c5?w=400" },
-            { id: 17, name: "Women's Stretchable Denim Jeans", category: "Womens Clothing", price: 849, mrp: 1699, rating: "★★★★☆ (530)", image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400" },
-            { id: 18, name: "Women's Banarasi Silk Saree", category: "Womens Clothing", price: 1899, mrp: 3499, rating: "★★★★★ (290)", image: "https://images.unsplash.com/photo-1610030469228-3e4b7cb0efb3?w=400" },
-            { id: 19, name: "Women's Cotton Palazzo & Kurta Set", category: "Womens Clothing", price: 1099, mrp: 2199, rating: "★★★★★ (810)", image: "https://images.unsplash.com/photo-1583391733975-298a00473a2d?w=400" },
-            { id: 20, name: "Women's Stylish Party Wear Gown", category: "Womens Clothing", price: 2199, mrp: 4599, rating: "★★★★★ (150)", image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=400" },
-            { id: 21, name: "Women's Winter Cardigan Sweater", category: "Womens Clothing", price: 999, mrp: 1899, rating: "★★★★☆ (220)", image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=400" },
-            { id: 22, name: "Women's Leggings Combo Pack", category: "Womens Clothing", price: 599, mrp: 1199, rating: "★★★★★ (1,400)", image: "https://images.unsplash.com/photo-1506629082925-236be3a07397?w=400" },
-            { id: 23, name: "Women's Floral Summer Maxi Dress", category: "Womens Clothing", price: 799, mrp: 1499, rating: "★★★★☆ (310)", image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=400" },
-            { id: 24, name: "Women's Traditional Lehenga Choli", category: "Womens Clothing", price: 2999, mrp: 5999, rating: "★★★★★ (95)", image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400" },
+      <!-- Products Grid -->
+      <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Dynamic Products Injected via JS -->
+      </div>
+    </main>
+  </div>
 
-            // --- Fresh Vegetables (Sabji) (12 Real Image items) ---
-            { id: 25, name: "Fresh Local Potato (Aloo) - 2kg Pack", category: "Fresh Vegetables", price: 60, mrp: 80, rating: "★★★★★ (3,100)", image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400" },
-            { id: 26, name: "Farm Fresh Red Tomato (Tamatar) - 1kg", category: "Fresh Vegetables", price: 40, mrp: 60, rating: "★★★★☆ (2,450)", image: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400" },
-            { id: 27, name: "Fresh Red Onion (Pyaz) - 2kg Pack", category: "Fresh Vegetables", price: 70, mrp: 90, rating: "★★★★★ (1,890)", image: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cf?w=400" },
-            { id: 28, name: "Fresh Cauliflower (Phool Gobhi) - 1pc", category: "Fresh Vegetables", price: 35, mrp: 50, rating: "★★★★☆ (920)", image: "https://images.unsplash.com/photo-1568584711075-3d021a7c3ca3?w=400" },
-            { id: 29, name: "Fresh Green Peas (Matar) - 500g", category: "Fresh Vegetables", price: 45, mrp: 65, rating: "★★★★★ (710)", image: "https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=400" },
-            { id: 30, name: "Fresh Green Spinach (Palak) - 250g", category: "Fresh Vegetables", price: 20, mrp: 30, rating: "★★★★☆ (540)", image: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=400" },
-            { id: 31, name: "Fresh Red Carrot (Gajjar) - 1kg", category: "Fresh Vegetables", price: 50, mrp: 70, rating: "★★★★☆ (630)", image: "https://images.unsplash.com/photo-1598170845058-12ef4a457939?w=400" },
-            { id: 32, name: "Fresh Yellow Lemon (Nimbu) - 250g", category: "Fresh Vegetables", price: 30, mrp: 40, rating: "★★★★★ (1,150)", image: "https://images.unsplash.com/photo-1534531173927-aeb928d54385?w=400" },
-            { id: 33, name: "Fresh Green Coriander (Dhaniya) - 100g", category: "Fresh Vegetables", price: 15, mrp: 25, rating: "★★★★★ (2,300)", image: "https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=400" },
-            { id: 34, name: "Fresh Green Chilli (Hari Mirch) - 250g", category: "Fresh Vegetables", price: 25, mrp: 35, rating: "★★★★☆ (840)", image: "https://images.unsplash.com/photo-1588252303782-cb801192612f?w=400" },
-            { id: 35, name: "Fresh Purple Brinjal (Baingan) - 1kg", category: "Fresh Vegetables", price: 40, mrp: 60, rating: "★★★★☆ (410)", image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400" },
-            { id: 36, name: "Fresh Lady Finger (Bhindi) - 1kg", category: "Fresh Vegetables", price: 50, mrp: 75, rating: "★★★★★ (980)", image: "https://images.unsplash.com/photo-1596560548464-f010549b84d7?w=400" },
-
-            // --- Kitchen Essentials (12 Real Image items) ---
-            { id: 37, name: "Mustard Oil Bottle - 1L", category: "Kitchen Essentials", price: 155, mrp: 180, rating: "★★★★★ (4,200)", image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400" },
-            { id: 38, name: "Premium Basmati Rice - 5kg Pack", category: "Kitchen Essentials", price: 549, mrp: 750, rating: "★★★★☆ (1,120)", image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400" },
-            { id: 39, name: "Stainless Steel Pressure Cooker 3L", category: "Kitchen Essentials", price: 1299, mrp: 1999, rating: "★★★★☆ (750)", image: "https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=400" },
-            { id: 40, name: "Shudh Chakki Wheat Atta - 5kg", category: "Kitchen Essentials", price: 240, mrp: 275, rating: "★★★★★ (5,600)", image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400" },
-            { id: 41, name: "Pure White Salt Pack - 1kg", category: "Kitchen Essentials", price: 28, mrp: 30, rating: "★★★★★ (8,900)", image: "https://images.unsplash.com/photo-1518110168401-f2877ee2e88b?w=400" },
-            { id: 42, name: "Yellow Toor Dal (Arhar) - 1kg", category: "Kitchen Essentials", price: 145, mrp: 170, rating: "★★★★☆ (1,820)", image: "https://images.unsplash.com/photo-1585992227540-7048c1617150?w=400" },
-            { id: 43, name: "Refined Cooking Oil - 1L", category: "Kitchen Essentials", price: 135, mrp: 160, rating: "★★★★☆ (2,100)", image: "https://images.unsplash.com/photo-1620706857370-e1b9770e8bb1?w=400" },
-            { id: 44, name: "Turmeric Powder (Haldi) Spices - 500g", category: "Kitchen Essentials", price: 110, mrp: 140, rating: "★★★★★ (940)", image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400" },
-            { id: 45, name: "Non-Stick Frying Pan Cookware", category: "Kitchen Essentials", price: 699, mrp: 1299, rating: "★★★★☆ (630)", image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=400" },
-            { id: 46, name: "Stainless Steel Ceramic Plates Set", category: "Kitchen Essentials", price: 1899, mrp: 3499, rating: "★★★★★ (320)", image: "https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=400" },
-            { id: 47, name: "Indian Red Chilli Powder - 500g", category: "Kitchen Essentials", price: 140, mrp: 180, rating: "★★★★☆ (790)", image: "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=400" },
-            { id: 48, name: "Pure Sugar Pack - 5kg", category: "Kitchen Essentials", price: 230, mrp: 260, rating: "★★★★★ (3,400)", image: "https://images.unsplash.com/photo-1581441363689-1f3c3c414635?w=400" },
-
-            // --- Home Use Services (10 Real Image items) ---
-            { id: 49, name: "Home Deep Cleaning Service", category: "Home Use Service", price: 1499, mrp: 2499, rating: "★★★★★ (450)", image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400" },
-            { id: 50, name: "Air Conditioner (AC) Repairing", category: "Home Use Service", price: 499, mrp: 999, rating: "★★★★☆ (890)", image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400" },
-            { id: 51, name: "Expert Home Plumber Visit", category: "Home Use Service", price: 199, mrp: 399, rating: "★★★★☆ (620)", image: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=400" },
-            { id: 52, name: "Expert Electrician Repair Visit", category: "Home Use Service", price: 199, mrp: 399, rating: "★★★★★ (780)", image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400" },
-            { id: 53, name: "RO Water Purifier Service", category: "Home Use Service", price: 349, mrp: 699, rating: "★★★★☆ (410)", image: "https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=400" },
-            { id: 54, name: "Sofa & Couch Vacuum Cleaning", category: "Home Use Service", price: 799, mrp: 1499, rating: "★★★★★ (310)", image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=400" },
-            { id: 55, name: "Kitchen Chimney Cleaning", category: "Home Use Service", price: 599, mrp: 1199, rating: "★★★★☆ (250)", image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=400" },
-            { id: 56, name: "Refrigerator Gas Check & Repair", category: "Home Use Service", price: 399, mrp: 799, rating: "★★★★☆ (190)", image: "https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=400" },
-            { id: 57, name: "Washing Machine Repair Visit", category: "Home Use Service", price: 399, mrp: 799, rating: "★★★★★ (280)", image: "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=400" },
-            { id: 58, name: "Home Pest Control Spraying", category: "Home Use Service", price: 999, mrp: 1999, rating: "★★★★★ (510)", image: "https://images.unsplash.com/photo-1632833239869-a37e3a5806d2?w=400" }
-        ];
-
-        let cart = [];
-        let loggedInUser = null;
-        let tempContact = "";
-
-        // Auto Open Login Popup when page loads
-        window.addEventListener('DOMContentLoaded', () => {
-            renderProducts(products);
-            setTimeout(() => {
-                openLoginModal();
-            }, 500);
-        });
-
-        function renderProducts(items) {
-            const grid = document.getElementById('productGrid');
-            if (items.length === 0) {
-                grid.innerHTML = "<p style='padding:20px;'>No items found in this category.</p>";
-                return;
-            }
-            grid.innerHTML = items.map(p => `
-                <div class="product-card">
-                    <div>
-                        <img src="${p.image}" alt="${p.name}">
-                        <div class="product-title">${p.name}</div>
-                        <div class="rating">${p.rating}</div>
-                        <div class="price-box">
-                            <span class="currency">₹</span><span class="price">${p.price}</span>
-                            <span class="mrp">M.R.P: ₹${p.mrp}</span>
-                        </div>
-                        <div class="prime-badge">✓ Fatehpur Express Delivery</div>
-                    </div>
-                    <button class="add-to-cart-btn" onclick="addToCart(${p.id})">
-                        ${p.category === 'Home Use Service' ? 'Book Service' : 'Add to Cart'}
-                    </button>
-                </div>
-            `).join('');
-        }
-
-        function openLoginModal() {
-            document.getElementById('loginModal').style.display = 'flex';
-        }
-
-        function closeLoginModal() {
-            document.getElementById('loginModal').style.display = 'none';
-        }
-
-        function sendOTP() {
-            const contact = document.getElementById('userInputContact').value.trim();
-            if (!contact) {
-                alert("Please enter your Phone number or Email address.");
-                return;
-            }
-            tempContact = contact;
-            document.getElementById('loginModalTitle').innerText = "Verify OTP";
-            document.getElementById('loginBodyContent').innerHTML = `
-                <p>Please enter the 6-digit OTP sent to <b>${contact}</b></p>
-                <input type="text" id="userOTP" class="input-field" placeholder="Enter 6-digit OTP (e.g. 123456)" maxlength="6">
-                <button class="apply-btn" onclick="verifyOTP()">Verify & Login</button>
-                <div style="font-size:12px; color:#007185; margin-top:15px; text-align:center; cursor:pointer;" onclick="openLoginModal()">Resend OTP</div>
-            `;
-            alert("Demo OTP sent! (You can enter any 6 digits like 123456)");
-        }
-
-        function verifyOTP() {
-            const otp = document.getElementById('userOTP').value.trim();
-            if (otp.length < 4) {
-                alert("Please enter a valid OTP.");
-                return;
-            }
-            loggedInUser = tempContact;
-            document.getElementById('userAccountNav').innerHTML = `<span>Hello, ${loggedInUser.split('@')[0]}</span><strong>My Account</strong>`;
-            alert("OTP Verified Successfully! Welcome to BizBoost.");
-            closeLoginModal();
-        }
-
-        function scrollToCategories() {
-            document.getElementById('exploreCategoriesSec').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function openLocationModal() {
-            document.getElementById('locationModal').style.display = 'flex';
-        }
-
-        function closeLocationModal() {
-            document.getElementById('locationModal').style.display = 'none';
-        }
-
-        function applyPincode() {
-            const pincode = document.getElementById('pincodeInput').value.trim();
-            if (pincode.length === 6) {
-                document.getElementById('headerLocation').innerText = `PIN: ${pincode}`;
-                closeLocationModal();
-            } else {
-                alert("Please enter a valid 6-digit PIN code");
-            }
-        }
-
-        function detectGPSLocation() {
-            if (!navigator.geolocation) {
-                alert("Geolocation is not supported by your browser");
-                return;
-            }
-            navigator.geolocation.getCurrentPosition((position) => {
-                const lat = position.coords.latitude.toFixed(2);
-                const lon = position.coords.longitude.toFixed(2);
-                document.getElementById('headerLocation').innerText = `GPS: ${lat}, ${lon}`;
-                closeLocationModal();
-            }, () => {
-                alert("Unable to retrieve your location. Please check permissions.");
-            });
-        }
-
-        function selectType(type) {
-            document.querySelectorAll('.choice-card').forEach(c => c.classList.remove('active'));
-            if (type === 'all') {
-                document.getElementById('sectionHeader').innerText = "All Available Offerings in Fatehpur";
-                renderProducts(products);
-            } else {
-                const card = document.getElementById(`card-${type}`);
-                if (card) card.classList.add('active');
-                document.getElementById('sectionHeader').innerText = `${type} Offerings in Fatehpur`;
-                const filtered = products.filter(p => p.category === type);
-                renderProducts(filtered);
-            }
-        }
-
-        function addToCart(id) {
-            const product = products.find(p => p.id === id);
-            cart.push(product);
-            updateCart();
-            toggleCart(true);
-        }
-
-        function updateCart() {
-            document.getElementById('cartCount').innerText = cart.length;
-            const container = document.getElementById('cartItems');
-            if (cart.length === 0) {
-                container.innerHTML = "<p>Your Cart is empty.</p>";
-            } else {
-                container.innerHTML = cart.map((item, index) => `
-                    <div class="cart-item-row">
-                        <div>
-                            <div style="font-size:14px; font-weight:bold;">${item.name}</div>
-                            <div style="font-size:14px; color:#B12704; font-weight:bold;">₹${item.price}</div>
-                        </div>
-                        <button onclick="removeFromCart(${index})" style="color:#007185; background:none; border:none; cursor:pointer;">Delete</button>
-                    </div>
-                `).join('');
-            }
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            document.getElementById('cartTotal').innerText = total;
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
-        }
-
-        function toggleCart(openState) {
-            const drawer = document.getElementById('cartDrawer');
-            if (openState === true) {
-                drawer.classList.add('open');
-            } else {
-                drawer.classList.toggle('open');
-            }
-        }
-
-        function filterCategory(category) {
-            selectType(category);
-        }
-
-        function filterProducts() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = products.filter(p => p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
-            renderProducts(filtered);
-        }
-
-        function checkout() {
-            if (cart.length === 0) {
-                alert("Please add items to cart!");
-                return;
-            }
-            if (!loggedInUser) {
-                alert("Please verify OTP / Log In first to place your order!");
-                openLoginModal();
-                return;
-            }
-            alert("Order / Booking Placed Successfully for " + loggedInUser + "!");
-            cart = [];
-            updateCart();
-            toggleCart(false);
-        }
-    </script>
-</body>
-</html>
+  <!-- ========================================== -->
+  <!-- 2. ADMIN & DROPSHIP OPERATIONS HQ          -->
+  <!-- ========================================== -->
+  <div id="admin-view" class="hidden">
+    <div class="flex min-h-[calc(100vh-45px)]">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-slate-900 text-slate-300 p-4 border-r border-slate-800 flex flex-col justify-between hidden md:flex">
+        <div>
+          <div class="pb-4 mb-4 border-b border-slate-800">
+            <p class="text-xs uppercase text-slate-500 font-semibold tracking-wider">Enterprise Ops</p>
+            <h2 class="text-lg font-bold text-white mt-1">Admin Console</h2>
+          </div>
+          <nav class="space-y-1">
+            <button onclick="switchAdminTab('overview')" class="admin-nav-item w-full flex items-center gap-3 px-3 py-2 text-sm rounded bg-slate-800 text-white font-medium">
+              <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard KPIs
+            </button>
+            <button onclick="switchAdminTab('orders')" class="admin-nav-item w-full flex items-center gap-3 px-3 py-2 text-sm rounded text-slate-400 hover:bg-slate-800 hover:text-white">
+              <i data-lucide="package-check" class="w-4 h-4"></i> Orders & Forwarding
+            </button>
+            <button onclick="switchAdminTab('suppliers')" class="admin-nav-item w-full flex items-center gap-3 px-3 py-2 text-sm rounded text-slate-400 hover:bg-slate-800 hover:text-white">
+              <i data-lucide="factory" class="w-4 h-4"></i> Suppliers & Import
+            </button>
+            <button onclick="switchAdminTab('shipping')" class="admin-nav-item w-full flex items-
