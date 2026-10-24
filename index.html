@@ -3,153 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ABHISHEK ENTERPRISES - Premium Dropshipping Footwear</title>
-  <!-- Tailwind CSS CDN for styling -->
+  <title>ABHISHEK ENTERPRISES — Dropship Control Hub</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    .badge {
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 9999px;
-    }
-    .custom-scroll::-webkit-scrollbar {
-      width: 6px;
-    }
-    .custom-scroll::-webkit-scrollbar-thumb {
-      background-color: #cbd5e1;
-      border-radius: 4px;
-    }
+    .custom-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased custom-scroll">
+<body class="bg-slate-950 text-slate-100 font-sans antialiased flex h-screen overflow-hidden">
 
-  <!-- Top Switcher Bar (Storefront <-> Admin HQ) -->
-  <header class="bg-slate-900 text-white px-4 py-2 flex flex-wrap justify-between items-center text-xs sticky top-0 z-50 shadow-md">
-    <div class="flex items-center gap-2">
-      <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-      <span class="font-bold tracking-wide uppercase text-slate-200">ABHISHEK ENTERPRISES</span>
-      <span class="text-slate-400 hidden sm:inline">| Dropship Pro Engine</span>
-    </div>
-    <div class="flex items-center gap-3">
-      <span class="text-slate-400">View Mode:</span>
-      <div class="bg-slate-800 p-1 rounded-lg flex border border-slate-700">
-        <button id="btn-customer-view" onclick="switchView('customer')" class="px-3 py-1 rounded bg-indigo-600 text-white font-medium transition">
-          Customer Storefront
+  <!-- LEFT SIDEBAR -->
+  <aside class="w-64 bg-slate-900 border-r border-slate-800 flex flex-col justify-between shrink-0">
+    <div>
+      <!-- Brand Header -->
+      <div class="p-5 border-b border-slate-800">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/30">
+            AE
+          </div>
+          <div>
+            <h1 class="text-sm font-bold tracking-tight text-white leading-none">ABHISHEK ENTERPRISES</h1>
+            <span class="text-[10px] text-emerald-400 font-medium">● Dropship Ops v2.4</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="p-3 space-y-1 text-xs font-medium">
+        <p class="px-3 py-2 text-[10px] uppercase tracking-wider text-slate-500 font-bold">Core Business</p>
+        
+        <button onclick="setTab('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg bg-indigo-600 text-white transition">
+          <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+          <span>Dashboard & Analytics</span>
         </button>
-        <button id="btn-admin-view" onclick="switchView('admin')" class="px-3 py-1 rounded text-slate-300 hover:text-white font-medium transition">
-          Admin Operations HQ
+
+        <button onclick="setTab('orders')" id="nav-orders" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800/80 hover:text-white transition">
+          <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+          <span>Orders & Forwarding</span>
+          <span class="ml-auto bg-amber-500/20 text-amber-300 text-[10px] px-1.5 py-0.5 rounded font-bold" id="badge-pending-orders">3 New</span>
         </button>
+
+        <button onclick="setTab('products')" id="nav-products" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800/80 hover:text-white transition">
+          <i data-lucide="package" class="w-4 h-4"></i>
+          <span>Products & Pricing Rules</span>
+        </button>
+
+        <p class="px-3 pt-4 pb-2 text-[10px] uppercase tracking-wider text-slate-500 font-bold">Dropship Logistics</p>
+
+        <button onclick="setTab('suppliers')" id="nav-suppliers" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800/80 hover:text-white transition">
+          <i data-lucide="factory" class="w-4 h-4"></i>
+          <span>Suppliers & Catalogs</span>
+        </button>
+
+        <button onclick="setTab('shipping')" id="nav-shipping" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800/80 hover:text-white transition">
+          <i data-lucide="truck" class="w-4 h-4"></i>
+          <span>Shiprocket & AWB Sync</span>
+        </button>
+
+        <button onclick="setTab('cod')" id="nav-cod" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800/80 hover:text-white transition">
+          <i data-lucide="banknote" class="w-4 h-4"></i>
+          <span>COD Reconciliation</span>
+        </button>
+
+        <button onclick="setTab('calculator')" id="nav-calculator" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800/80 hover:text-white transition">
+          <i data-lucide="calculator" class="w-4 h-4"></i>
+          <span>Profit & RTO Calculator</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- User Status Footer -->
+    <div class="p-3 border-t border-slate-800 bg-slate-900/50">
+      <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50">
+        <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center font-bold text-slate-300 text-xs">AT</div>
+        <div class="overflow-hidden">
+          <p class="text-xs font-bold text-slate-200 truncate">Abhishek Tiwari</p>
+          <p class="text-[10px] text-slate-400">Store Owner</p>
+        </div>
       </div>
     </div>
-  </header>
+  </aside>
 
-  <!-- ========================================== -->
-  <!-- 1. CUSTOMER STOREFRONT (Jo Buyer ko Dikhega) -->
-  <!-- ========================================== -->
-  <div id="customer-view" class="block">
-    <!-- Navbar -->
-    <nav class="bg-white border-b border-gray-200 sticky top-10 z-40">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-16 items-center">
-        <div class="flex items-center gap-4">
-          <a href="#" class="text-xl font-extrabold tracking-tight text-gray-900">ABHISHEK <span class="text-indigo-600">SHOES</span></a>
-          <div class="hidden md:flex space-x-6 text-sm font-medium text-gray-600 ml-6">
-            <button onclick="filterCategory('All')" class="hover:text-indigo-600">All Products</button>
-            <button onclick="filterCategory('Sneakers')" class="hover:text-indigo-600">Sneakers</button>
-            <button onclick="filterCategory('Sports')" class="hover:text-indigo-600">Sports Shoes</button>
-            <button onclick="filterCategory('Casual')" class="hover:text-indigo-600">Casuals</button>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-4">
-          <!-- Search Bar -->
-          <div class="relative hidden sm:block">
-            <input type="text" id="store-search" oninput="handleSearch(this.value)" placeholder="Search shoes..." class="bg-gray-100 rounded-full pl-9 pr-4 py-1.5 text-sm w-56 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3 top-2.5"></i>
-          </div>
-
-          <!-- Order Tracking Button -->
-          <button onclick="openTrackingModal()" class="text-sm font-medium text-gray-700 hover:text-indigo-600 flex items-center gap-1">
-            <i data-lucide="truck" class="w-4 h-4"></i>
-            <span class="hidden sm:inline">Track Order</span>
-          </button>
-
-          <!-- Cart Icon -->
-          <button onclick="toggleCartDrawer(true)" class="relative p-2 text-gray-700 hover:text-indigo-600">
-            <i data-lucide="shopping-bag" class="w-6 h-6"></i>
-            <span id="cart-count-badge" class="absolute top-0 right-0 bg-indigo-600 text-white badge">0</span>
-          </button>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Hero Banner -->
-    <section class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-        <div class="space-y-4 max-w-xl">
-          <span class="bg-indigo-600 text-xs uppercase px-3 py-1 font-semibold rounded-full tracking-wider">Pan India Express Delivery</span>
-          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">Trending Sneaker & Shoe Collections</h1>
-          <p class="text-slate-300 text-sm sm:text-base">Premium comfort, street-style designs aur pure verified dropship quality. COD Available nationwide.</p>
-          <div class="flex gap-3">
-            <button onclick="document.getElementById('shop-section').scrollIntoView({behavior: 'smooth'})" class="px-6 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 font-semibold text-sm shadow-md transition">Explore Catalog</button>
-          </div>
-        </div>
-        <div class="w-full md:w-auto flex justify-center">
-          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80" alt="Sneaker Hero" class="rounded-xl shadow-2xl max-h-64 object-cover transform -rotate-3 hover:rotate-0 transition duration-300">
-        </div>
-      </div>
-    </section>
-
-    <!-- Shop & Catalog Section -->
-    <main id="shop-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <!-- Filter and Sort Bar -->
-      <div class="flex flex-wrap justify-between items-center mb-6 pb-4 border-b border-gray-200 gap-4">
-        <div class="flex gap-2 items-center flex-wrap" id="category-pills">
-          <span class="text-xs font-semibold text-gray-500 uppercase mr-1">Categories:</span>
-          <button onclick="filterCategory('All')" class="cat-pill px-3 py-1 text-xs rounded-full bg-indigo-600 text-white font-medium">All</button>
-          <button onclick="filterCategory('Sneakers')" class="cat-pill px-3 py-1 text-xs rounded-full bg-gray-200 text-gray-700 font-medium hover:bg-gray-300">Sneakers</button>
-          <button onclick="filterCategory('Sports')" class="cat-pill px-3 py-1 text-xs rounded-full bg-gray-200 text-gray-700 font-medium hover:bg-gray-300">Sports</button>
-          <button onclick="filterCategory('Casual')" class="cat-pill px-3 py-1 text-xs rounded-full bg-gray-200 text-gray-700 font-medium hover:bg-gray-300">Casual</button>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <label class="text-xs text-gray-500 font-medium">Sort By:</label>
-          <select id="sort-select" onchange="handleSort(this.value)" class="text-xs border border-gray-300 rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-indigo-500">
-            <option value="featured">Featured</option>
-            <option value="low-high">Price: Low to High</option>
-            <option value="high-low">Price: High to Low</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Products Grid -->
-      <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Dynamic Products Injected via JS -->
-      </div>
-    </main>
-  </div>
-
-  <!-- ========================================== -->
-  <!-- 2. ADMIN & DROPSHIP OPERATIONS HQ          -->
-  <!-- ========================================== -->
-  <div id="admin-view" class="hidden">
-    <div class="flex min-h-[calc(100vh-45px)]">
-      <!-- Sidebar -->
-      <aside class="w-64 bg-slate-900 text-slate-300 p-4 border-r border-slate-800 flex flex-col justify-between hidden md:flex">
-        <div>
-          <div class="pb-4 mb-4 border-b border-slate-800">
-            <p class="text-xs uppercase text-slate-500 font-semibold tracking-wider">Enterprise Ops</p>
-            <h2 class="text-lg font-bold text-white mt-1">Admin Console</h2>
-          </div>
-          <nav class="space-y-1">
-            <button onclick="switchAdminTab('overview')" class="admin-nav-item w-full flex items-center gap-3 px-3 py-2 text-sm rounded bg-slate-800 text-white font-medium">
-              <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard KPIs
-            </button>
-            <button onclick="switchAdminTab('orders')" class="admin-nav-item w-full flex items-center gap-3 px-3 py-2 text-sm rounded text-slate-400 hover:bg-slate-800 hover:text-white">
-              <i data-lucide="package-check" class="w-4 h-4"></i> Orders & Forwarding
-            </button>
-            <button onclick="switchAdminTab('suppliers')" class="admin-nav-item w-full flex items-center gap-3 px-3 py-2 text-sm rounded text-slate-400 hover:bg-slate-800 hover:text-white">
-              <i data-lucide="factory" class="w-4 h-4"></i> Suppliers & Import
-            </button>
-            <button onclick="switchAdminTab('shipping')" class="admin-nav-item w-full flex items-
+  <!-- MAIN VIEWPORT -->
+  <main class="flex-1 flex flex-col h-screen overflow-hidden">
+    
+    <!-- Top Action Bar -->
+    <header class="h-14 border-b border-slate-800 bg-slate-900/60 backdrop-blur px-6 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-semibold uppercase text-slate-40
