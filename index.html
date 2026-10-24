@@ -3,92 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ABHISHEK ENTERPRISES — Dropship Control Hub</title>
+  <title>ABHISHEK ENTERPRISES — Store Admin Hub</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     .custom-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
-    .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
+    .nav-active { background-color: #27272a !important; color: #ffffff !important; }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased flex h-screen overflow-hidden">
+<body class="bg-black text-zinc-100 font-sans antialiased flex h-screen overflow-hidden">
 
-  <!-- LEFT SIDEBAR -->
-  <aside class="w-64 bg-slate-900 border-r border-slate-800 flex flex-col justify-between shrink-0">
-    <div>
-      <!-- Brand Header -->
-      <div class="p-5 border-b border-slate-800">
+  <!-- ================= SHOPIFY-STYLE SIDEBAR ================= -->
+  <aside class="w-64 bg-[#111111] border-r border-zinc-800 flex flex-col justify-between shrink-0 select-none">
+    <div class="flex flex-col h-full overflow-hidden">
+      
+      <!-- Top Brand Logo -->
+      <div class="px-4 py-3 flex items-center justify-between border-b border-zinc-850">
         <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/30">
+          <div class="w-7 h-7 bg-emerald-500 rounded-lg flex items-center justify-center font-black text-black text-xs">
             AE
           </div>
-          <div>
-            <h1 class="text-sm font-bold tracking-tight text-white leading-none">ABHISHEK ENTERPRISES</h1>
-            <span class="text-[10px] text-emerald-400 font-medium">● Dropship Ops v2.4</span>
+          <span class="text-xs font-bold text-zinc-200 tracking-wide">ABHISHEK ENT.</span>
+        </div>
+        <button class="text-zinc-400 hover:text-white p-1 rounded">
+          <i data-lucide="panel-left-close" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Quick Search Bar (Ctrl K) -->
+      <div class="px-3 py-2.5">
+        <div class="relative">
+          <i data-lucide="search" class="w-4 h-4 text-zinc-500 absolute left-2.5 top-2"></i>
+          <input type="text" placeholder="Search" class="w-full bg-zinc-900 border border-zinc-800 rounded-lg pl-8 pr-12 py-1.5 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-zinc-700">
+          <span class="absolute right-2 top-1.5 text-[10px] bg-zinc-800 text-zinc-400 px-1.5 py-0.5 rounded border border-zinc-700">Ctrl K</span>
+        </div>
+      </div>
+
+      <!-- Navigation Menu Items -->
+      <nav class="flex-1 overflow-y-auto px-2 space-y-0.5 text-xs custom-scroll">
+        <button onclick="navigate('home')" id="btn-home" class="nav-item nav-active w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-zinc-300 hover:bg-zinc-900 transition">
+          <i data-lucide="home" class="w-4 h-4"></i>
+          <span>Home</span>
+        </button>
+
+        <button onclick="navigate('orders')" id="btn-orders" class="nav-item w-full flex items-center justify-between px-3 py-2 rounded-lg text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200 transition">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="inbox" class="w-4 h-4"></i>
+            <span>Orders</span>
           </div>
-        </div>
-      </div>
-
-      <!-- Navigation Links -->
-      <nav class="p-3 space-y-1 text-xs font-medium">
-        <p class="px-3 py-2 text-[10px] uppercase tracking-wider text-slate-500 font-bold">Core Business</p>
-        
-        <button onclick="setTab('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg bg-indigo-600 text-white transition">
-          <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
-          <span>Dashboard & Analytics</span>
+          <span class="bg-amber-500/20 text-amber-300 text-[10px] px-1.5 py-0.2 rounded font-bold" id="badge-orders">3</span>
         </button>
 
-        <button onclick="setTab('orders')" id="nav-orders" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800/80 hover:text-white transition">
-          <i data-lucide="shopping-cart" class="w-4 h-4"></i>
-          <span>Orders & Forwarding</span>
-          <span class="ml-auto bg-amber-500/20 text-amber-300 text-[10px] px-1.5 py-0.5 rounded font-bold" id="badge-pending-orders">3 New</span>
+        <button onclick="navigate('products')" id="btn-products" class="nav-item w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200 transition">
+          <i data-lucide="tag" class="w-4 h-4"></i>
+          <span>Products</span>
         </button>
 
-        <button onclick="setTab('products')" id="nav-products" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800/80 hover:text-white transition">
-          <i data-lucide="package" class="w-4 h-4"></i>
-          <span>Products & Pricing Rules</span>
+        <button onclick="navigate('customers')" id="btn-customers" class="nav-item w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200 transition">
+          <i data-lucide="user" class="w-4 h-4"></i>
+          <span>Customers</span>
         </button>
 
-        <p class="px-3 pt-4 pb-2 text-[10px] uppercase tracking-wider text-slate-500 font-bold">Dropship Logistics</p>
-
-        <button onclick="setTab('suppliers')" id="nav-suppliers" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800/80 hover:text-white transition">
-          <i data-lucide="factory" class="w-4 h-4"></i>
-          <span>Suppliers & Catalogs</span>
+        <button onclick="navigate('growth')" id="btn-growth" class="nav-item w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200 transition">
+          <i data-lucide="gauge" class="w-4 h-4"></i>
+          <span>Growth</span>
         </button>
 
-        <button onclick="setTab('shipping')" id="nav-shipping" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800/80 hover:text-white transition">
-          <i data-lucide="truck" class="w-4 h-4"></i>
-          <span>Shiprocket & AWB Sync</span>
+        <button onclick="navigate('discounts')" id="btn-discounts" class="nav-item w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200 transition">
+          <i data-lucide="badge-percent" class="w-4 h-4"></i>
+          <span>Discounts</span>
         </button>
 
-        <button onclick="setTab('cod')" id="nav-cod" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800/80 hover:text-white transition">
-          <i data-lucide="banknote" class="w-4 h-4"></i>
-          <span>COD Reconciliation</span>
+        <button onclick="navigate('content')" id="btn-content" class="nav-item w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200 transition">
+          <i data-lucide="image" class="w-4 h-4"></i>
+          <span>Content</span>
         </button>
 
-        <button onclick="setTab('calculator')" id="nav-calculator" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800/80 hover:text-white transition">
-          <i data-lucide="calculator" class="w-4 h-4"></i>
-          <span>Profit & RTO Calculator</span>
+        <button onclick="navigate('markets')" id="btn-markets" class="nav-item w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200 transition">
+          <i data-lucide="globe" class="w-4 h-4"></i>
+          <span>Markets</span>
         </button>
-      </nav>
-    </div>
 
-    <!-- User Status Footer -->
-    <div class="p-3 border-t border-slate-800 bg-slate-900/50">
-      <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50">
-        <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center font-bold text-slate-300 text-xs">AT</div>
-        <div class="overflow-hidden">
-          <p class="text-xs font-bold text-slate-200 truncate">Abhishek Tiwari</p>
-          <p class="text-[10px] text-slate-400">Store Owner</p>
-        </div>
-      </div>
-    </div>
-  </aside>
+        <button onclick="navigate('analytics')" id="btn-analytics" class="nav-item w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200 transition">
+          <i data-lucide="bar-chart-2" class="w-4 h-4"></i>
+          <span>Analytics</span>
+        </button>
 
-  <!-- MAIN VIEWPORT -->
-  <main class="flex-1 flex flex-col h-screen overflow-hidden">
-    
-    <!-- Top Action Bar -->
-    <header class="h-14 border-b border-slate-800 bg-slate-900/60 backdrop-blur px-6 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <span class="text-xs font-semibold uppercase text-slate-40
+        <div class="pt-3 pb-1">
+          <div class="px-3 flex items-center justify-between text-zinc-500 font-semibold text-[11px]">
